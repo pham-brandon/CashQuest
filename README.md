@@ -12,7 +12,7 @@ This application will be a personal management tool, curated to user’s needs t
 
 ## Stakeholders
 
-- Project Developers:  Salam Al-Rifaie, Darron Lee, Zahra Mohamed, An Pham, Brandon Pham.
+- Project Developers:  Salam Al-Rifaie, Darren Lee, Zahra Mohamed, An Pham, Brandon Pham.
 - Project Instructor: Dr. Abdul-Rahman Mawlood-Yunis.
 - End Users:  Individuals seeking to manage their finances and log expenses.
 
