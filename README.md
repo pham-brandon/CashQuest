@@ -14,7 +14,7 @@ This application will be a personal management tool, curated to user’s needs t
 
 - Project Developers:  Salam Al-Rifaie, Darron Lee, Zahra Mohamed, An Pham, Brandon Pham.
 - Project Instructor: Dr. Abdul-Rahman Mawlood-Yunis.
-- End Users:  Individuals seeking to managecinoacttheir finances and log expenses.
+- End Users:  Individuals seeking to manage their finances and log expenses.
 
 ## Project Deliverables
 
