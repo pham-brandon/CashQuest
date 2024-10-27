@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
             return insets;
         });
 
-        usernameEditText = findViewById(R.id.username);
+        usernameEditText = findViewById(R.id.full_name);
         emailField = findViewById(R.id.email);
         Button registerButton = findViewById(R.id.registerButton);
         Button loginButton = findViewById(R.id.loginLinkButton);
@@ -71,11 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        // Hide Action Bar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-        setContentView(R.layout.activity_register);
+
 
     }
 
