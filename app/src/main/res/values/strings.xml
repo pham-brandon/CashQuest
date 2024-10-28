@@ -26,4 +26,12 @@
     <string name="invalidEmail">Please enter a valid email address</string>
     <string name="emptyPassword">The password cannot be empty</string>
 
+    <!-- Goals Activity -->
+    <string name="goalsTitle">Goals</string>
+    <string name="level">Level</string>
+    <string name ="exp">EXP</string>
+    <string name="create_goal">Create New</string>
+    <string name="goals_progress_text">Goals and Progress</string>
+
+
 </resources>
