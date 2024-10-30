@@ -15,6 +15,7 @@ import android.content.Intent;
 
 import android.util.Patterns;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 public class LoginActivity extends AppCompatActivity {
 
