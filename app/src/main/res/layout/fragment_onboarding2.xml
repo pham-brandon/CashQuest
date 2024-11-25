@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@color/purple_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/star"
+        android:layout_width="79dp"
+        android:layout_height="69dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/star" />
+
+    <ImageView
+        android:id="@+id/onboardingImage1"
+        android:layout_width="186dp"
+        android:layout_height="163dp"
+        android:src="@drawable/achievement1" />
+
+    <TextView
+        android:id="@+id/onboardingTitle"
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/jersey"
+        android:text="@string/title2"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/onboardingText"
+        android:layout_width="306dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/pixelify_sans"
+        android:text="@string/onboarding2"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</LinearLayout>

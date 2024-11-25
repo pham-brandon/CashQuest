@@ -13,8 +13,11 @@ import android.widget.EditText;
 import android.view.View;
 import android.content.Intent;
 import android.util.Patterns;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.CheckBox;
+
+import com.personal_finance_app.ui.Onboarding.SuccessfulRegistration;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -23,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String EMAIL_KEY = "DefaultEmail";
     private EditText emailField, passwordEditText, confirmPasswordEditText, usernameEditText;
     private CheckBox termsCheckBox;
+    private ImageButton registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         usernameEditText = findViewById(R.id.full_name);
         emailField = findViewById(R.id.email);
-        Button registerButton = findViewById(R.id.registerButton);
+        ImageButton registerButton = findViewById(R.id.registerButton);
         Button loginButton = findViewById(R.id.loginLinkButton);
         termsCheckBox = findViewById(R.id.termsCheckbox);
         passwordEditText = findViewById(R.id.password);
@@ -70,8 +74,6 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
     }
 
@@ -132,9 +134,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     // Proceed with registration logic
     private void registerUser() {
-        Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show();
+        String username = usernameEditText.getText().toString();
 
-        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        // After successful registration show welcome screen
+        Intent intent = new Intent(RegisterActivity.this, SuccessfulRegistration.class);
+        intent.putExtra("USER_NAME", username);
         startActivity(intent);
         finish();
     }

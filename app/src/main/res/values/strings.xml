@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Personal_Finance_App</string>
+    <string name="app_name">Cash Quest</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -36,6 +36,20 @@
     <string name="goal_date">Date</string>
     <string name="goal_exp">Goal EXP</string>
     <string name="goal_exp_format">+%1$d EXP</string>
+
+    <!-- OnBoarding Activity -->
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="welcome">Welcome to</string>
+    <string name="tagline">Manage expenses, set goals, and track progress!</string>
+    <string name="title1">Take hold of your finances</string>
+    <string name="onboarding1">Stay on top by effortlessly tracking your subscriptions &amp; bills</string>
+    <string name="title2">Set and achieve financial goals</string>
+    <string name="onboarding2">Set your financial goals and track progress</string>
+    <string name="title3">Log your expenses with ease</string>
+    <string name="onboarding3">Quickly log an expense by using the smart receipt scanning feature</string>
+    <string name="welcomeUser">Welcome, User!</string>
+    <string name="welcomeDesc">Everything went well and Cash Quest is ready to work with you</string>
 
 
 </resources>

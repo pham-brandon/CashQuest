@@ -8,12 +8,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
 import android.content.Intent;
 
 import android.util.Patterns;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -22,7 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String EMAIL_KEY = "DefaultEmail";
     private EditText emailField;
-    private Button loginButton, registerButton;
+    private ImageButton loginButton;
+    private Button registerButton;
     private EditText passwordField;
 
     @Override
@@ -65,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString(EMAIL_KEY, email);
                 editor.commit();
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, GoalsActivity.class);
                 startActivity(intent);
             }
         });
@@ -78,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
     }
 
