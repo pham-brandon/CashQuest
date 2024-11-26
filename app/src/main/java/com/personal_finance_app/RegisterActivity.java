@@ -2,8 +2,12 @@ package com.personal_finance_app;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;

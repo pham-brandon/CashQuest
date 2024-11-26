@@ -2,6 +2,7 @@ package com.personal_finance_app;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import android.util.Patterns;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
@@ -25,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String EMAIL_KEY = "DefaultEmail";
     private EditText emailField;
     private ImageButton loginButton;
-    private Button registerButton;
+    private Button registerButton, forgotPasswordButton;
     private EditText passwordField;
 
     @Override
@@ -44,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         passwordField = findViewById(R.id.passwordLogin);
         registerButton = findViewById(R.id.registerButton);
+        forgotPasswordButton = findViewById(R.id.forgotPassword);
 
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         String storedEmail = sharedPreferences.getString(EMAIL_KEY, "email@domain.com");
@@ -79,6 +83,23 @@ public class LoginActivity extends AppCompatActivity {
                 // Navigate to RegisterActivity
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        // forgot password on click listener
+        forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String email = emailField.getText().toString().trim();
+                // Check if the email field is empty
+                if (TextUtils.isEmpty(email)) {
+                    // Show a Snackbar asking for email input
+                    Snackbar.make(v, "Please enter your email address", Snackbar.LENGTH_LONG).show();
+                } else {
+                    // Show a Snackbar confirming password reset instructions
+                    Snackbar.make(v, "Check your email for password reset instructions", Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
