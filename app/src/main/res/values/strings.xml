@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Cash Quest</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_expenses">Expenses</string>
+    <string name="title_insights">Insights</string>
+    <string name="title_placeholder">Add</string>
+    <string name="title_milestones">Milestones</string>
 
     <!-- Register Activity -->
     <string name="registerTitle">Register</string>
