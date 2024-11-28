@@ -112,8 +112,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/goals_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="354dp"
+        android:layout_width="412dp"
+        android:layout_height="436dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:nestedScrollingEnabled="false"
