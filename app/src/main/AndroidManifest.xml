@@ -35,13 +35,28 @@
 
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
-
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
 
         <activity
             android:name=".LoginActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ExpensesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".InsightsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddExpense"
+            android:exported="true" />
+        <activity
+            android:name=".MilestonesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddExpense"
             android:exported="true" />
 
     </application>

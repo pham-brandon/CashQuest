@@ -3,6 +3,7 @@ package com.personal_finance_app;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,10 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -45,6 +50,43 @@ public class GoalsActivity extends AppCompatActivity {
 
         // Load goals data for testing
         // loadGoalsData();
+
+        // Initialize BottomNavigationView
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+
+
+        // Set selected item for the current activity
+        navView.setSelectedItemId(R.id.menu_goals);
+
+        navView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.menu_expenses) {
+                startActivity(new Intent(this, ExpensesActivity.class));
+                overridePendingTransition(0, 0); // No animation
+                return true;
+            } else if (itemId == R.id.menu_insights) {
+                startActivity(new Intent(this, InsightsActivity.class));
+                overridePendingTransition(0, 0); // No animation
+                return true;
+            } else if (itemId == R.id.menu_goals) {
+                return true;
+            } else if (itemId == R.id.menu_milestones) {
+                startActivity(new Intent(this, MilestonesActivity.class));
+                overridePendingTransition(0, 0); // No animation
+                return true;
+            }
+
+            return false;
+        });
+
+        FloatingActionButton fab = findViewById(R.id.fab_add);
+        fab.setOnClickListener(view -> {
+            // Navigate to the desired page
+            Intent intent = new Intent(this, AddExpense.class);
+            startActivity(intent);
+            overridePendingTransition(0, 0); // No animation
+        });
     }
 
     private void loadGoalsData() {

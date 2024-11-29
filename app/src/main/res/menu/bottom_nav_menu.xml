@@ -13,7 +13,6 @@
 
     <item
         android:id="@+id/menu_placeholder"
-        android:enabled="false"
         android:title=""
         android:icon="@drawable/ic_blank"/>
 
