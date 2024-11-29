@@ -1,6 +1,56 @@
 <resources>
-    <string name="app_name">Personal_Finance_App</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">Cash Quest</string>
+    <string name="title_expenses">Expenses</string>
+    <string name="title_insights">Insights</string>
+    <string name="title_placeholder">Add</string>
+    <string name="title_milestones">Milestones</string>
+
+    <!-- Register Activity -->
+    <string name="registerTitle">Register</string>
+    <string name="username">Username</string>
+    <string name="full_name">Full name</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="agree">I\’ve read and agree to the</string>
+    <string name="privacyPolicyLink">terms of privacy policy</string>
+    <string name="register">REGISTER</string>
+    <string name="alreadyAccount">Already have an account?</string>
+    <string name="loginText">LOGIN◀</string>
+
+    <!-- Login Activity -->
+    <string name="login">Log in</string>
+    <string name="loginButton">LOGIN</string>
+    <string name="forgotPassword">Forgot Password?</string>
+    <string name="noAccount">Don\'t have an account?</string>
+    <string name="registerText">REGISTER◀</string>
+    <string name="invalidEmail">Please enter a valid email address</string>
+    <string name="emptyPassword">The password cannot be empty</string>
+
+    <!-- Goals Activity -->
+    <string name="goalsTitle">Goals</string>
+    <string name="level">Level</string>
+    <string name ="exp">EXP</string>
+    <string name="create_goal">Create New</string>
+    <string name="goals_progress_text">Goals and Progress</string>
+    <string name="goal_desc">Goal description</string>
+    <string name="goal_date">Date</string>
+    <string name="goal_exp">Goal EXP</string>
+    <string name="goal_exp_format">+%1$d EXP</string>
+
+    <!-- OnBoarding Activity -->
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="welcome">Welcome to</string>
+    <string name="tagline">Manage expenses, set goals, and track progress!</string>
+    <string name="title1">Take hold of your finances</string>
+    <string name="onboarding1">Stay on top by effortlessly tracking your subscriptions &amp; bills</string>
+    <string name="title2">Set and achieve financial goals</string>
+    <string name="onboarding2">Set your financial goals and track progress</string>
+    <string name="title3">Log your expenses with ease</string>
+    <string name="onboarding3">Quickly log an expense by using the smart receipt scanning feature</string>
+    <string name="welcomeUser">Welcome, User!</string>
+    <string name="welcomeDesc">Everything went well and Cash Quest is ready to work with you</string>
+
+
 </resources>
