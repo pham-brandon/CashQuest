@@ -55,9 +55,6 @@
         <activity
             android:name=".MilestonesActivity"
             android:exported="true" />
-        <activity
-            android:name=".AddExpense"
-            android:exported="true" />
 
     </application>
 
