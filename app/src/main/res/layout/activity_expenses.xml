@@ -4,8 +4,7 @@
     android:id="@+id/menu_expenses"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_background"
-    android:paddingTop="?attr/actionBarSize">
+    android:background="@color/purple_background">
 
     <fragment
         android:id="@+id/side_menu_fragment"
