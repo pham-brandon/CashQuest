@@ -113,7 +113,7 @@
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="12dp"
-        android:textColorHint="@color/grey" />//>
+        android:textColorHint="@color/grey" />
 
     <!-- Password EditText -->
     <TextView
@@ -135,7 +135,7 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="12dp"
-        android:textColorHint="@color/grey" />//>
+        android:textColorHint="@color/grey" />
 
     <Button
         android:id="@+id/saveButton"

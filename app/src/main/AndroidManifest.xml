@@ -63,6 +63,10 @@
         <activity
             android:name=".MilestonesActivity"
             android:exported="true" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="true" />
+
 
     </application>
 
