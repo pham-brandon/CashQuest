@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.util.Patterns;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -26,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String EMAIL_KEY = "DefaultEmail";
+    private static final String EXP_KEY = "UserEXP";
+    private static final String LEVEL_KEY = "UserLevel";
     private EditText emailField;
     private ImageButton loginButton;
     private Button registerButton, forgotPasswordButton;
@@ -51,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         String storedEmail = sharedPreferences.getString(EMAIL_KEY, "email@domain.com");
+        int storedEXP = sharedPreferences.getInt(EXP_KEY, 0); // Default EXP is 0
+        int storedLevel = sharedPreferences.getInt(LEVEL_KEY, 1); // Default Level is 1
         emailField.setText(storedEmail);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +73,11 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
+                // Save email, EXP, and Level
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(EMAIL_KEY, email);
+                editor.putInt(EXP_KEY, storedEXP); // Retain the current EXP
+                editor.putInt(LEVEL_KEY, storedLevel); // Retain the current Level
                 editor.commit();
 
                 Intent intent = new Intent(LoginActivity.this, ExpensesActivity.class);

@@ -11,11 +11,22 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MilestonesActivity extends AppCompatActivity {
 
+    private PreferenceHelper preferencesHelper;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milestones);
 
+        preferencesHelper = new PreferenceHelper(this);
+
+        // Load user level or EXP if needed for milestones
+        int userLevel = preferencesHelper.getUserLevel();
+        Log.d("MilestonesActivity", "User Level: " + userLevel);
+
+        int userExp = preferencesHelper.getUserExp();
+        Log.d("MilestonesActivity", "User EXP: " + userExp);
 
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);

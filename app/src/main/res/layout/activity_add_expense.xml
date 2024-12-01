@@ -1,12 +1,160 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/very_light_blue">
+    android:background="#10C6D6"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TEMPORARY PAGE"/>
+        android:id="@+id/addExpenseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/jersey"
+        android:text="Add an expense"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="366dp"
+        android:layout_height="168dp"
+        android:layout_marginBottom="20dp"
+        android:background="#CAFAFF"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/pixelify_sans"
+            android:text="Scan a receipt"
+            android:textColor="#0B0000"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/uploadReceiptButton"
+                android:layout_width="97dp"
+                android:layout_height="103dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/register_button"
+                android:backgroundTint="#C0ACEB"
+                android:contentDescription="Upload receipt"
+                android:src="@drawable/ic_upload_white" />
+
+            <ImageButton
+                android:id="@+id/cameraReceiptButton"
+                android:layout_width="87dp"
+                android:layout_height="96dp"
+                android:background="@drawable/register_button"
+                android:backgroundTint="#C0ACEB"
+                android:contentDescription="Capture receipt"
+                android:src="@drawable/ic_camera_white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="377dp"
+        android:layout_height="466dp"
+        android:layout_marginBottom="20dp"
+        android:background="#CAFAFF"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/pixelify_sans"
+            android:text="Add Manually"
+            android:textColor="#161515"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="10dp"
+            android:background="#C0ACEB"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/expenseTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#C0ACEB"
+                android:fontFamily="@font/pixelify_sans"
+                android:hint="Expense Title"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="10dp"
+            android:background="#C0ACEB"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#C0ACEB"
+                android:fontFamily="@font/pixelify_sans"
+                android:hint="Amount"
+                android:inputType="numberDecimal"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="10dp"
+            android:background="#C0ACEB"
+            android:padding="10dp">
+
+            <Spinner
+                android:id="@+id/expenseType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/register_button"
+                android:backgroundTint="#C0ACEB"
+                android:entries="@array/expense_types" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:background="#C0ACEB"
+            android:padding="10dp">
+
+            <Spinner
+                android:id="@+id/billFrequency"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/register_button"
+                android:backgroundTint="#C0ACEB"
+                android:entries="@array/bill_frequencies" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/createExpenseButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/register_button"
+            android:fontFamily="@font/jersey"
+            android:text="Create"
+            android:textColor="#FAFAFA"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>
