@@ -74,4 +74,12 @@
     <string name="expenses">Expenses</string>
     <string name="logout">Log out</string>
 
+    <!-- Edit Profile Activity -->
+    <string name="profilePicture">Profile Picture</string>
+    <string name="newUsername">Enter a new username</string>
+    <string name="newEmail">Enter a new email</string>
+    <string name="newPassword">Enter a new password</string>
+    <string name="saveChanges">Save Changes</string>
+    <string name="deleteProfile">Delete Profile</string>
+
 </resources>

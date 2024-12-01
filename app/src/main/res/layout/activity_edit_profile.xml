@@ -9,7 +9,7 @@
     tools:context=".EditProfileActivity"
     android:background="@color/purple_background">
 
-  <fragment
+  <androidx.fragment.app.FragmentContainerView
       android:id="@+id/side_menu_fragment"
       android:name="com.personal_finance_app.SideMenuFragment"
       android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
         android:layout_height="64dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/white"
-        android:contentDescription="Profile Picture"
+        android:contentDescription="@string/profilePicture"
         android:scaleType="centerCrop"
         android:background="@drawable/avatar_background"
         android:src="@drawable/default_avatar"
@@ -73,7 +73,7 @@
         android:id="@+id/usernameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Username"
+        android:text="@string/username"
         android:textSize="20sp"
         android:fontFamily="@font/jersey"
         android:layout_marginTop="16dp"
@@ -86,7 +86,7 @@
         android:layout_marginBottom="16dp"
         android:drawableEnd="@drawable/ic_pencil"
         android:fontFamily="@font/jersey"
-        android:hint="Enter a new username"
+        android:hint="@string/newUsername"
         android:minHeight="48dp"
         android:padding="12dp"
         android:textColor="#151940"
@@ -97,7 +97,7 @@
         android:id="@+id/emailTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email"
+        android:text="@string/email"
         android:textSize="20sp"
         android:fontFamily="@font/jersey"
         android:textColor="#151940"/>
@@ -109,7 +109,7 @@
         android:layout_marginBottom="16dp"
         android:drawableEnd="@drawable/ic_pencil"
         android:fontFamily="@font/jersey"
-        android:hint="Enter a new email"
+        android:hint="@string/newEmail"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="12dp"
@@ -120,7 +120,7 @@
         android:id="@+id/passwordTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Password"
+        android:text="@string/password"
         android:textSize="20sp"
         android:fontFamily="@font/jersey"
         android:textColor="#151940"/>
@@ -131,19 +131,20 @@
         android:layout_height="wrap_content"
         android:drawableEnd="@drawable/ic_pencil"
         android:fontFamily="@font/jersey"
-        android:hint="Enter a new password"
+        android:hint="@string/newPassword"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="12dp"
         android:textColorHint="@color/grey" />
 
+    <!-- Save Changes Button -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:fontFamily="@font/jersey"
-        android:text="Save Changes"
+        android:text="@string/saveChanges"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -152,16 +153,16 @@
         android:backgroundTint="@color/light_purple"
         android:textStyle="bold"/>
 
+    <!-- Delete Profile Button -->
     <Button
         android:id="@+id/deleteProfileButton"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/jersey"
-        android:text="Delete Profile"
+        android:text="@string/deleteProfile"
         android:backgroundTint="@color/red"
         android:layout_marginStart="203dp"
         android:layout_marginTop="20dp"/>
-
 
   </LinearLayout>
 
