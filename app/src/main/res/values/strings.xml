@@ -29,7 +29,7 @@
 
     <!-- Goals Activity -->
     <string name="goalsTitle">Goals</string>
-    <string name="level">Level</string>
+    <string name="level_text">Level</string>
     <string name ="exp">EXP</string>
     <string name="create_goal">Create New</string>
     <string name="goals_progress_text">Goals and Progress</string>
@@ -52,5 +52,8 @@
     <string name="welcomeUser">Welcome, User!</string>
     <string name="welcomeDesc">Everything went well and Cash Quest is ready to work with you</string>
 
+
+    <!-- Milestones Activity -->
+    <string name="milestones_and_achievements_title">Milestones and Achievements</string>
 
 </resources>
