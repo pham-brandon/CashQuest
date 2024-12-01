@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@color/purple_background">
+
+    <!-- Login Title -->
+    <TextView
+        android:id="@+id/loginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        android:layout_marginStart="50dp"
+        android:fontFamily="@font/jersey"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="45sp"/>
+
+    <!-- Email Address Field -->
+    <EditText
+        android:id="@+id/emailLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginText"
+        android:autofillHints="email"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/edit_text_background"
+        android:padding="15dp"
+        android:textColorHint="@color/grey"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/pixelify_sans"
+        android:textSize="18sp"/>
+
+    <!-- Password Field -->
+    <EditText
+        android:id="@+id/passwordLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emailLogin"
+        android:autofillHints="password"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:background="@drawable/edit_text_background"
+        android:padding="15dp"
+        android:textColorHint="@color/grey"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/pixelify_sans"
+        android:textSize="18sp"/>
+
+    <!-- Login Button  -->
+    <ImageButton
+        android:id="@+id/loginButton"
+        android:layout_width="346dp"
+        android:layout_height="65dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="400dp"
+        android:background="@null"
+        android:contentDescription="@string/register"
+        app:srcCompat="@drawable/login_button"
+        app:tint="@null" />
+
+    <Button
+        android:id="@+id/forgotPassword"
+        android:layout_width="400dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/passwordLogin"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
+        android:gravity="end"
+        android:text="@string/forgotPassword"
+        android:textColor="@color/light_blue"
+        android:fontFamily="@font/pixelify_sans"
+        android:background="@android:color/transparent"
+        android:textSize="16sp" />
+
+    <!-- Register  -->
+    <TextView
+        android:id="@+id/registerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginButton"
+        android:layout_marginTop="170dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="40dp"
+        android:text="@string/noAccount"
+        android:textColor="#10C6D6"
+        android:fontFamily="@font/pixelify_sans"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:id="@+id/registerButton"
+        style="@style/TextButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/registerText"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="1dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/jersey"
+        android:text="@string/register"
+        android:drawableLeft="@drawable/arrow_icon"/>
+
+</RelativeLayout>
