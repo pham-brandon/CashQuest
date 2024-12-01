@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.gms.google-services") // Firebase plugin
 }
 
 android {
@@ -44,6 +43,7 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.activity)
+    implementation(libs.play.services.mlkit.text.recognition)
 
     // Firebase dependencies
     implementation(platform("com.google.firebase:firebase-bom:32.1.0"))
