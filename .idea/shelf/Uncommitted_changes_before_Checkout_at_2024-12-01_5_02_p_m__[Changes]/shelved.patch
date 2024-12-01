@@ -1,0 +1,59 @@
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">Cash Quest</string>\r\n    <string name=\"title_home\">Home</string>\r\n    <string name=\"title_dashboard\">Dashboard</string>\r\n    <string name=\"title_notifications\">Notifications</string>\r\n\r\n    <string-array name=\"expense_types\">\r\n        <item>Food</item>\r\n        <item>Utilities</item>\r\n        <item>Other</item>\r\n    </string-array>\r\n\r\n    <string-array name=\"bill_frequencies\">\r\n        <item>Week</item>\r\n        <item>Month</item>\r\n        <item>Custom</item>\r\n    </string-array>\r\n\r\n    <string name=\"app_name\">Cash Quest</string>\r\n    <string name=\"title_expenses\">Expenses</string>\r\n    <string name=\"title_insights\">Insights</string>\r\n    <string name=\"title_placeholder\">Add</string>\r\n    <string name=\"title_milestones\">Milestones</string>\r\n\r\n    <!-- Register Activity -->\r\n    <string name=\"registerTitle\">Register</string>\r\n    <string name=\"username\">Username</string>\r\n    <string name=\"full_name\">Full name</string>\r\n    <string name=\"email\">Email Address</string>\r\n    <string name=\"password\">Password</string>\r\n    <string name=\"confirmPassword\">Confirm Password</string>\r\n    <string name=\"agree\">I\\’ve read and agree to the</string>\r\n    <string name=\"privacyPolicyLink\">terms of privacy policy</string>\r\n    <string name=\"register\">REGISTER</string>\r\n    <string name=\"alreadyAccount\">Already have an account?</string>\r\n    <string name=\"loginText\">LOGIN◀</string>\r\n\r\n    <!-- Login Activity -->\r\n    <string name=\"login\">Log in</string>\r\n    <string name=\"loginButton\">LOGIN</string>\r\n    <string name=\"forgotPassword\">Forgot Password?</string>\r\n    <string name=\"noAccount\">Don\\'t have an account?</string>\r\n    <string name=\"registerText\">REGISTER◀</string>\r\n    <string name=\"invalidEmail\">Please enter a valid email address</string>\r\n    <string name=\"emptyPassword\">The password cannot be empty</string>\r\n\r\n    <!-- Goals Activity -->\r\n    <string name=\"goalsTitle\">Goals</string>\r\n    <string name=\"level_text\">Level</string>\r\n    <string name =\"exp\">EXP</string>\r\n    <string name=\"create_new\">Create New</string>\r\n    <string name=\"goals_progress_text\">Goals and Progress</string>\r\n    <string name=\"goal_desc\">Goal description</string>\r\n    <string name=\"goal_date\">Date</string>\r\n    <string name=\"goal_exp\">Goal EXP</string>\r\n    <string name=\"goal_exp_format\">+%1$d EXP</string>\r\n\r\n    <!-- OnBoarding Activity -->\r\n    <string name=\"skip\">Skip</string>\r\n    <string name=\"next\">Next</string>\r\n    <string name=\"welcome\">Welcome to</string>\r\n    <string name=\"tagline\">Manage expenses, set goals, and track progress!</string>\r\n    <string name=\"title1\">Take hold of your finances</string>\r\n    <string name=\"onboarding1\">Stay on top by effortlessly tracking your subscriptions &amp; bills</string>\r\n    <string name=\"title2\">Set and achieve financial goals</string>\r\n    <string name=\"onboarding2\">Set your financial goals and track progress</string>\r\n    <string name=\"title3\">Log your expenses with ease</string>\r\n    <string name=\"onboarding3\">Quickly log an expense by using the smart receipt scanning feature</string>\r\n    <string name=\"welcomeUser\">Welcome, User!</string>\r\n    <string name=\"welcomeDesc\">Everything went well and Cash Quest is ready to work with you</string>\r\n\r\n    <!-- Firebase Configuration -->\r\n    <string name=\"google_app_id\">1:952458125922:android:ac4586423399944859673b</string>\r\n    <string name=\"google_api_key\">AIzaSyB8QD9R2VARVkxXObZV2LVGD2DANNE8IDo</string>\r\n    <string name=\"firebase_database_url\">https://sparky-febd0.firebaseio.com/</string>\r\n    <!-- Side menu items -->\r\n    <string name=\"editProfile\">Edit Profile</string>\r\n    <string name=\"stats\">Stats</string>\r\n    <string name=\"expenses\">Expenses</string>\r\n    <string name=\"logout\">Log out</string>\r\n\r\n    <!-- Milestones Activity -->\r\n    <string name=\"milestones_and_achievements_title\">Milestones and Achievements</string>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision c0e1a98f5d22dae5de80f16538bfbe527966f309)
++++ b/app/src/main/res/values/strings.xml	(date 1733090344754)
+@@ -16,7 +16,7 @@
+         <item>Custom</item>
+     </string-array>
+ 
+-    <string name="app_name">Cash Quest</string>
++
+     <string name="title_expenses">Expenses</string>
+     <string name="title_insights">Insights</string>
+     <string name="title_placeholder">Add</string>
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetSelector\">\r\n    <selectionStates>\r\n      <SelectionState runConfigName=\"app\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n      <SelectionState runConfigName=\"OCRTestActivity\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n      <SelectionState runConfigName=\"AddExpenseActivity\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n      </SelectionState>\r\n    </selectionStates>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+--- a/.idea/deploymentTargetSelector.xml	(revision c0e1a98f5d22dae5de80f16538bfbe527966f309)
++++ b/.idea/deploymentTargetSelector.xml	(date 1733090259071)
+@@ -5,12 +5,6 @@
+       <SelectionState runConfigName="app">
+         <option name="selectionMode" value="DROPDOWN" />
+       </SelectionState>
+-      <SelectionState runConfigName="OCRTestActivity">
+-        <option name="selectionMode" value="DROPDOWN" />
+-      </SelectionState>
+-      <SelectionState runConfigName="AddExpenseActivity">
+-        <option name="selectionMode" value="DROPDOWN" />
+-      </SelectionState>
+     </selectionStates>
+   </component>
+ </project>
+\ No newline at end of file
+Index: app/src/main/res/mipmap-hdpi/ic_launcher_round.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/mipmap-hdpi/ic_launcher_round.xml b/app/src/main/res/mipmap-hdpi/ic_launcher_round.xml
+new file mode 100644
+--- /dev/null	(date 1733090441395)
++++ b/app/src/main/res/mipmap-hdpi/ic_launcher_round.xml	(date 1733090441395)
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
++    <background android:drawable="@color/ic_launcher_background"/>
++    <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
++</adaptive-icon>
+\ No newline at end of file
