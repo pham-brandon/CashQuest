@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -126,15 +127,26 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalsViewHol
     }
 
     private void markGoalAsComplete(Goal goal, int position) {
-        goal.setCompleted(true);
-        notifyItemChanged(position);
 
-        // Update EXP in GoalsActivity
-        if (context instanceof GoalsActivity) {
-            GoalsActivity activity = (GoalsActivity) context;
-            activity.increaseEXP(5);  // Increment EXP by 5 for completed goal
+        if (!goal.isCompleted()) {
+            goal.setCompleted(true);
+            notifyItemChanged(position);  // Update the RecyclerView item
+
+            // Update EXP in GoalsActivity
+            if (context instanceof GoalsActivity) {
+                GoalsActivity activity = (GoalsActivity) context;
+                activity.increaseEXP(5);  // Increment EXP by 5 for completed goal
+            }
+
+            // Show a toast to inform the user the goal is now complete
+            Toast.makeText(context, "Goal marked as complete!", Toast.LENGTH_SHORT).show();
+
+        } else {
+            // If goal is already completed, show a Toast message
+            Toast.makeText(context, "Goal is already completed.", Toast.LENGTH_SHORT).show();
         }
     }
+
     public void deleteGoal(int position) {
         if (position >= 0 && position < goalsList.size()) {
             Log.d("DeleteGoal", "Before removal, Position: " + position + " List size: " + goalsList.size());
