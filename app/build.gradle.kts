@@ -50,4 +50,6 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.9")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation ("com.google.mlkit:text-recognition:16.0.1")
+
 }
