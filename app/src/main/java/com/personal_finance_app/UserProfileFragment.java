@@ -1,5 +1,6 @@
 package com.personal_finance_app;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,11 +42,25 @@ public class UserProfileFragment extends Fragment {
         return view;
     }
 
-    // Add methods to update user data dynamically
     public void setUserProfile(String username, int level, int progress, int avatarResId) {
+        // Update UI components
         usernameTextView.setText(username);
         levelTextView.setText("lvl: " + level);
         progressBar.setProgress(progress);
         avatarImageView.setImageResource(avatarResId);
+
+        // Save data to SharedPreferences
+        SharedPreferences preferences = getActivity().getSharedPreferences("personal_finance_prefs", getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putInt("user_level", level);
+        editor.putInt("user_exp", progress); // Assuming progress is equivalent to EXP
+        editor.apply();  // Commit changes
     }
+
+    public void updateUserProfile(int level, int progress) {
+        levelTextView.setText("lvl: " + level);
+        progressBar.setProgress(progress);
+    }
+
 }

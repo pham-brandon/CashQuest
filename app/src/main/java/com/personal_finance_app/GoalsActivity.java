@@ -28,13 +28,13 @@ import java.util.Calendar;
 import java.util.List;
 
 public class GoalsActivity extends AppCompatActivity {
+
     private RecyclerView recyclerView;
     private GoalsAdapter goalsAdapter;
     private List<Goal> goalsList;
-    private ProgressBar expBar;
-    private TextView levelTextView;
     private PreferenceHelper preferencesHelper;
     private int lastEXP = -1;
+    private UserProfileFragment userProfileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,67 +43,41 @@ public class GoalsActivity extends AppCompatActivity {
 
         preferencesHelper = new PreferenceHelper(this);
 
-        // Initialize the EXP and Level
-        expBar = findViewById(R.id.progressBar);
-        levelTextView = findViewById(R.id.user_level);
-
+        // Initialize the profile fragment
+        userProfileFragment = (UserProfileFragment) getSupportFragmentManager().findFragmentById(R.id.user_profile_fragment);
+        if (userProfileFragment == null) {
+            userProfileFragment = new UserProfileFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.profile_container, userProfileFragment)
+                    .commit();
+        }
 
         // Get EXP and Level from preferences
-        int exp = preferencesHelper.getUserExp();
-        int level = preferencesHelper.getUserLevel();
+        SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
+        int exp = prefs.getInt("user_exp", 0);
+        int level = prefs.getInt("user_level", 1);
 
-        expBar.setProgress(exp % 15);
-        levelTextView.setText("Level: " + level);
-
+        // Initialize goals list and RecyclerView
         goalsList = new ArrayList<>();
         loadGoalsFromPreferences();
 
-        // Initialize RecyclerView
         recyclerView = findViewById(R.id.goals_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //User currentUser = preferencesHelper.getCurrentUser();
-
-        // Reset the user's info for testing ...
-        //currentUser.setExp(0);
-        //currentUser.setLevel(1);
-        //updateEXPBar(0);
-        // goalsList.clear(); // Clear the goals list if needed
-
-        goalsAdapter = new GoalsAdapter(goalsList,this);
+        goalsAdapter = new GoalsAdapter(goalsList, this);
         recyclerView.setAdapter(goalsAdapter);
 
         Button addGoalButton = findViewById(R.id.add_goal_button);
-        addGoalButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                promptNewGoal();
-            }
-        });
+        addGoalButton.setOnClickListener(v -> promptNewGoal());
 
-        // Initialize nav bar
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(R.id.menu_goals);
-
         navView.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-
-            if (itemId == R.id.menu_expenses) {
+            if (item.getItemId() == R.id.menu_goals) return true;
+            if (item.getItemId() == R.id.menu_expenses) {
                 startActivity(new Intent(this, ExpensesActivity.class));
-                overridePendingTransition(0, 0); // No animation
-                return true;
-            } else if (itemId == R.id.menu_insights) {
-                startActivity(new Intent(this, InsightsActivity.class));
-                overridePendingTransition(0, 0); // No animation
-                return true;
-            } else if (itemId == R.id.menu_goals) {
-                return true;
-            } else if (itemId == R.id.menu_milestones) {
-                startActivity(new Intent(this, MilestonesActivity.class));
-                overridePendingTransition(0, 0); // No animation
                 return true;
             }
-
             return false;
         });
 
@@ -111,27 +85,57 @@ public class GoalsActivity extends AppCompatActivity {
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddExpense.class);
             startActivity(intent);
-            overridePendingTransition(0, 0); // No animation
         });
+
+        // Update the EXP and Level in the fragment
+        updateEXPBar(exp);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // load EXP and level from SharedPreferences
         int exp = preferencesHelper.getUserExp();
         int level = preferencesHelper.getUserLevel();
-
         updateEXPBar(exp);
     }
 
+    public void updateEXPBar(int exp) {
+        if (exp == lastEXP) return; // Avoid redundant updates
+        lastEXP = exp;
+
+        int level = exp / 15;  // 15 EXP per level
+        int progress = exp % 15;
+        int progressPercentage = (progress * 100) / 15;
+
+        // Save updated values to preferences
+        preferencesHelper.setUserExp(exp);
+        preferencesHelper.setUserLevel(level);
+
+        // Update the UserProfileFragment with new level and progress
+        if (userProfileFragment != null) {
+            userProfileFragment.updateUserProfile(level + 1, progressPercentage); // +1 for 1-based level
+        }
+
+        // Debug logs
+        Log.d("EXP Progress", "Calculated progress: " + progressPercentage);
+        Log.d("EXP Level", "Current level: " + (level + 1));
+    }
+
+    public void increaseEXP(int expIncrease) {
+        int currentEXP = preferencesHelper.getUserExp();
+        int newEXP = currentEXP + expIncrease;
+
+        // Update the EXP bar and level
+        updateEXPBar(newEXP);
+
+        // Save the updated EXP to SharedPreferences
+        preferencesHelper.setUserExp(newEXP);
+    }
 
     private void promptNewGoal() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("New Goal");
 
-        // Set up the input for the description
         final EditText input = new EditText(this);
         input.setHint("Enter goal description");
         builder.setView(input);
@@ -139,7 +143,6 @@ public class GoalsActivity extends AppCompatActivity {
         builder.setPositiveButton("Next", (dialog, which) -> {
             String description = input.getText().toString().trim();
             if (!description.isEmpty()) {
-                // After description, prompt for due date
                 showDatePicker(description);
             }
         });
@@ -160,54 +163,16 @@ public class GoalsActivity extends AppCompatActivity {
                     addGoal(description, dueDate);
                 }, year, month, day);
 
-        // Set the minimum date to today
         datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
         datePickerDialog.show();
     }
 
     private void addGoal(String description, String dueDate) {
         goalsList.add(new Goal(description, "Due: " + dueDate, 5));
-
-
         goalsAdapter.notifyDataSetChanged();
-        saveGoalsToPreferences(); // Save updated goals list
+        saveGoalsToPreferences();
     }
 
-    public void updateEXPBar(int exp) {
-        if (exp == lastEXP) return; // Avoid redundant updates
-        lastEXP = exp;
-
-        // Calculate level and progress
-        int level = exp / 15;  // 15 EXP per level
-        int progress = exp % 15;
-        int progressPercentage = (progress * 100) / 15;
-
-        // Save updated values to preferences
-        preferencesHelper.setUserExp(exp);
-        preferencesHelper.setUserLevel(level);
-
-        // Update UI on main thread
-        runOnUiThread(() -> {
-            levelTextView.setText("Level: " + (level + 1)); // 1-based level
-            expBar.setProgress(progressPercentage);
-        });
-
-        // Debug logs
-        Log.d("EXP Progress", "Calculated progress: " + progressPercentage);
-        Log.d("EXP Level", "Current level: " + (level + 1));
-    }
-
-    public void increaseEXP(int expIncrease) {
-        // Get current EXP and update it
-        int currentEXP = preferencesHelper.getUserExp();
-        int newEXP = currentEXP + expIncrease;
-
-        // Update the EXP bar and level
-        updateEXPBar(newEXP);
-
-        // Save the updated EXP to SharedPreferences
-        preferencesHelper.setUserExp(newEXP);
-    }
     public void saveGoalsToPreferences() {
         SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
