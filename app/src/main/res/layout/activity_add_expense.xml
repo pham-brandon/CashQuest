@@ -43,7 +43,7 @@
                 android:layout_width="97dp"
                 android:layout_height="103dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/rounded_button_bg"
+                android:background="@drawable/register_button"
                 android:backgroundTint="#C0ACEB"
                 android:contentDescription="Upload receipt"
                 android:src="@drawable/ic_upload_white" />
@@ -52,7 +52,7 @@
                 android:id="@+id/cameraReceiptButton"
                 android:layout_width="87dp"
                 android:layout_height="96dp"
-                android:background="@drawable/rounded_button_bg"
+                android:background="@drawable/register_button"
                 android:backgroundTint="#C0ACEB"
                 android:contentDescription="Capture receipt"
                 android:src="@drawable/ic_camera_white" />
@@ -122,7 +122,7 @@
                 android:id="@+id/expenseType"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/rounded_button_bg"
+                android:background="@drawable/register_button"
                 android:backgroundTint="#C0ACEB"
                 android:entries="@array/expense_types" />
 
@@ -140,7 +140,7 @@
                 android:id="@+id/billFrequency"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/rounded_button_bg"
+                android:background="@drawable/register_button"
                 android:backgroundTint="#C0ACEB"
                 android:entries="@array/bill_frequencies" />
 
@@ -151,7 +151,7 @@
             android:id="@+id/createExpenseButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button_bg"
+            android:background="@drawable/register_button"
             android:fontFamily="@font/jersey"
             android:text="Create"
             android:textColor="#FAFAFA"
