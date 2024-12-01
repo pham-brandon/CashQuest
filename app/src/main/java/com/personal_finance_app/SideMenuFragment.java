@@ -38,13 +38,13 @@ public class SideMenuFragment extends Fragment {
                     // Navigate to Edit Profile
                     startActivity(new Intent(getActivity(), EditProfileActivity.class));
                     return true;
-                } else if (itemId == R.id.stats) {
+                } else if (itemId == R.id.help) {
                     // Navigate to Stats
-                    startActivity(new Intent(getActivity(), InsightsActivity.class));
+                    startActivity(new Intent(getActivity(), HelpActivity.class));
                     return true;
-                } else if (itemId == R.id.expenses) {
+                } else if (itemId == R.id.about) {
                     // Navigate to Expenses
-                    startActivity(new Intent(getActivity(), ExpensesActivity.class));
+                    startActivity(new Intent(getActivity(), AboutActivity.class));
                     return true;
                 } else if (itemId == R.id.logout) {
                     // Log out

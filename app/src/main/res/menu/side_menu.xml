@@ -4,11 +4,11 @@
         android:id="@+id/edit_profile"
         android:title="@string/editProfile" />
     <item
-        android:id="@+id/stats"
-        android:title="@string/stats" />
+        android:id="@+id/help"
+        android:title="@string/help" />
     <item
-        android:id="@+id/expenses"
-        android:title="@string/expenses" />
+        android:id="@+id/about"
+        android:title="@string/about" />
     <item
         android:id="@+id/logout"
         android:title="@string/logout" />

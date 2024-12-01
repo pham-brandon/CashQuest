@@ -32,6 +32,8 @@
         <activity android:name=".ui.Onboarding.OnboardingActivity" />
         <activity android:name=".ui.Onboarding.WelcomeActivity" />
         <activity android:name=".ui.Onboarding.SuccessfulRegistration" />
+        <activity android:name=".HelpActivity" />
+        <activity android:name=".AboutActivity" />
 
         <activity
             android:name=".GoalsActivity"

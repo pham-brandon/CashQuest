@@ -75,11 +75,10 @@
     <string name="firebase_database_url">https://sparky-febd0.firebaseio.com/</string>
     <!-- Side menu items -->
     <string name="editProfile">Edit Profile</string>
-    <string name="stats">Stats</string>
-    <string name="expenses">Expenses</string>
+    <string name="help">Help</string>
+    <string name="about">About</string>
     <string name="logout">Log out</string>
 
-    <!-- Milestones Activity -->
-    <string name="milestones_and_achievements_title">Milestones and Achievements</string>
+    <string name="milestonesTitle">Milestones and Achievements</string>
 
 </resources>
