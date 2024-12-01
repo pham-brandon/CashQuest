@@ -1,4 +1,4 @@
-package personal_finance_app_backend.models;
+package com.personal_finance_app.models;
 
 public class Category {
     private int categoryId;
