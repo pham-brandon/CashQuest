@@ -55,7 +55,7 @@
         android:background="@color/light_purple"
         android:backgroundTint="@color/blue"
         android:fontFamily="@font/retro_font"
-        android:text="@string/create_goal"
+        android:text="@string/create_new"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="bold"

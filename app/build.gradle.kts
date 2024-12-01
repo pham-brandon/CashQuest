@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.activity)
+    implementation(libs.play.services.mlkit.text.recognition)
     testImplementation(libs.junit)
     testImplementation("mysql:mysql-connector-java:8.0.29")
     testImplementation("org.mockito:mockito-core:4.0.0")
