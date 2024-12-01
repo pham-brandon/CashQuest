@@ -46,6 +46,14 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.activity)
     implementation(libs.play.services.mlkit.text.recognition)
+
+    // Firebase dependencies
+    implementation(platform("com.google.firebase:firebase-bom:32.1.0"))
+    implementation("com.google.firebase:firebase-database:20.1.0")
+    implementation("com.google.firebase:firebase-auth:21.3.0")
+    implementation("com.google.firebase:firebase-analytics:21.2.2")
+
+    // Test dependencies
     testImplementation(libs.junit)
     testImplementation("mysql:mysql-connector-java:8.0.29")
     testImplementation("org.mockito:mockito-core:4.0.0")

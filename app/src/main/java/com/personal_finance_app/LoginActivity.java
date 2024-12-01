@@ -1,155 +1,97 @@
 package com.personal_finance_app;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
-import android.view.View;
-import android.content.Intent;
-
-import android.util.Patterns;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private static final String TAG = "LoginActivity";
-    private static final String PREFS_NAME = "MyPrefsFile";
-    private static final String EMAIL_KEY = "DefaultEmail";
-    private static final String EXP_KEY = "UserEXP";
-    private static final String LEVEL_KEY = "UserLevel";
-    private EditText emailField;
+    private EditText emailField, passwordField;
     private ImageButton loginButton;
     private Button registerButton, forgotPasswordButton;
-    private EditText passwordField;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
+        // Bind UI elements
         emailField = findViewById(R.id.emailLogin);
-        loginButton = findViewById(R.id.loginButton);
         passwordField = findViewById(R.id.passwordLogin);
+        loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
         forgotPasswordButton = findViewById(R.id.forgotPassword);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        String storedEmail = sharedPreferences.getString(EMAIL_KEY, "email@domain.com");
-        int storedEXP = sharedPreferences.getInt(EXP_KEY, 0); // Default EXP is 0
-        int storedLevel = sharedPreferences.getInt(LEVEL_KEY, 1); // Default Level is 1
-        emailField.setText(storedEmail);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailField.getText().toString();
-                String password = passwordField.getText().toString();
+        // Set up login button click listener
+        loginButton.setOnClickListener(v -> loginUser());
 
-                if (!isValidEmail(email)) {
-                    Toast.makeText(LoginActivity.this, getString(R.string.invalidEmail), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (password.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, getString(R.string.emptyPassword), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Save email, EXP, and Level
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(EMAIL_KEY, email);
-                editor.putInt(EXP_KEY, storedEXP); // Retain the current EXP
-                editor.putInt(LEVEL_KEY, storedLevel); // Retain the current Level
-                editor.commit();
-
-                Intent intent = new Intent(LoginActivity.this, ExpensesActivity.class);
-                startActivity(intent);
-            }
+        // Navigate to RegisterActivity when the register button is clicked
+        registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to RegisterActivity
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
+        // Forgot password button click listener
+        forgotPasswordButton.setOnClickListener(v -> {
+            String email = emailField.getText().toString().trim();
+            if (email.isEmpty()) {
+                Snackbar.make(v, "Please enter your email address", Snackbar.LENGTH_LONG).show();
+            } else {
+                // Send password reset email
+                mAuth.sendPasswordResetEmail(email)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Snackbar.make(v, "Check your email for password reset instructions", Snackbar.LENGTH_LONG).show();
+                            } else {
+                                Snackbar.make(v, "Failed to send reset email. Try again.", Snackbar.LENGTH_LONG).show();
+                            }
+                        });
             }
         });
-
-        // forgot password on click listener
-        forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String email = emailField.getText().toString().trim();
-                // Check if the email field is empty
-                if (TextUtils.isEmpty(email)) {
-                    // Show a Snackbar asking for email input
-                    Snackbar.make(v, "Please enter your email address", Snackbar.LENGTH_LONG).show();
-                } else {
-                    // Show a Snackbar confirming password reset instructions
-                    Snackbar.make(v, "Check your email for password reset instructions", Snackbar.LENGTH_LONG).show();
-                }
-            }
-        });
-
     }
 
-    private boolean isValidEmail(CharSequence email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
+    private void loginUser() {
+        String email = emailField.getText().toString().trim();
+        String password = passwordField.getText().toString().trim();
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(TAG, "onResume called in LoginActivity");
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(TAG, "onStart called in LoginActivity");
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(TAG, "onPause called in LoginActivity");
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(TAG, "onStop called in LoginActivity");
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "onDestroy called in LoginActivity");
-    }
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.i(TAG, "onSaveInstanceState called in LoginActivity");
-    }
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Log.i(TAG, "onRestoreInstanceState called in LoginActivity");
+        // Validate email format
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailField.setError("Invalid email format");
+            return;
+        }
+
+        // Validate password field
+        if (password.isEmpty()) {
+            passwordField.setError("Password cannot be empty");
+            return;
+        }
+
+        // Attempt to sign in with email and password
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Login successful
+                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        // Login failed
+                        Toast.makeText(LoginActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }
