@@ -16,7 +16,7 @@
         <item>Custom</item>
     </string-array>
 
-    <string name="app_name">Cash Quest</string>
+
     <string name="title_expenses">Expenses</string>
     <string name="title_insights">Insights</string>
     <string name="title_placeholder">Add</string>
