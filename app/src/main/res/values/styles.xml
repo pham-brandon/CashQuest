@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="Base.Theme.Personal_Finance_App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here -->
     </style>
@@ -15,5 +15,15 @@
         <item name="android:fontFamily">@font/jersey</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">true</item>
+    </style>
+        <style name="CustomSpinnerStyle">
+            <item name="android:spinnerMode">dropdown</item>
+            <item name="android:dropDownWidth">match_parent</item>
+            <item name="android:popupBackground">@android:drawable/btn_dropdown</item>
+        </style>
+
+
+    <style name="CustomSpinnerItemStyle">
+        <item name="android:fontFamily">@font/pixelify_sans</item>
     </style>
 </resources>

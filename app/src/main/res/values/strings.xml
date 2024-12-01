@@ -1,18 +1,21 @@
 <resources>
-    <!-- Add Expense -->
-    <string-array name="expense_types">
-        <item>Food</item>
-        <item>Utilities</item>
-        <item>Other</item>
-    </string-array>
+    <string name="app_name">Personal_Finance_App</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <resources>
+        <string-array name="expense_types">
+            <item>Food</item>
+            <item>Utilities</item>
+            <item>Other</item>
+        </string-array>
 
-    <string-array name="bill_frequencies">
-        <item>Week</item>
-        <item>Month</item>
-        <item>Custom</item>
-    </string-array>
-
-
+        <string-array name="bill_frequencies">
+            <item>Week</item>
+            <item>Month</item>
+            <item>Custom</item>
+        </string-array>
+    </resources>
     <string name="app_name">Cash Quest</string>
     <string name="title_expenses">Expenses</string>
     <string name="title_insights">Insights</string>
@@ -43,7 +46,7 @@
 
     <!-- Goals Activity -->
     <string name="goalsTitle">Goals</string>
-    <string name="level_text">Level</string>
+    <string name="level">Level</string>
     <string name ="exp">EXP</string>
     <string name="create_new">Create New</string>
     <string name="goals_progress_text">Goals and Progress</string>
@@ -66,13 +69,5 @@
     <string name="welcomeUser">Welcome, User!</string>
     <string name="welcomeDesc">Everything went well and Cash Quest is ready to work with you</string>
 
-    <!-- Side menu items -->
-    <string name="editProfile">Edit Profile</string>
-    <string name="stats">Stats</string>
-    <string name="expenses">Expenses</string>
-    <string name="logout">Log out</string>
-
-    <!-- Milestones Activity -->
-    <string name="milestones_and_achievements_title">Milestones and Achievements</string>
 
 </resources>

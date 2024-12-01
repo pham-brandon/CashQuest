@@ -103,7 +103,7 @@
         android:id="@+id/createExpenseButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_new"
+        android:text="Create"
         android:textColor="#FFFFFF"
         android:background="@color/black"
         android:textSize="16sp" />
