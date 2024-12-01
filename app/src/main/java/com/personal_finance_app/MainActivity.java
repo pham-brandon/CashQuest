@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AddExpense.class); // Replace with the desired activity
             startActivity(intent);
         });
-
+        //123
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         // Passing each menu ID as a set of Ids because each
