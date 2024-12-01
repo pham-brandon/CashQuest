@@ -1,0 +1,33 @@
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">Cash Quest</string>\r\n    <string name=\"title_expenses\">Expenses</string>\r\n    <string name=\"title_insights\">Insights</string>\r\n    <string name=\"title_placeholder\">Add</string>\r\n    <string name=\"title_milestones\">Milestones</string>\r\n\r\n    <!-- Register Activity -->\r\n    <string name=\"registerTitle\">Register</string>\r\n    <string name=\"username\">Username</string>\r\n    <string name=\"full_name\">Full name</string>\r\n    <string name=\"email\">Email Address</string>\r\n    <string name=\"password\">Password</string>\r\n    <string name=\"confirmPassword\">Confirm Password</string>\r\n    <string name=\"agree\">I\\’ve read and agree to the</string>\r\n    <string name=\"privacyPolicyLink\">terms of privacy policy</string>\r\n    <string name=\"register\">REGISTER</string>\r\n    <string name=\"alreadyAccount\">Already have an account?</string>\r\n    <string name=\"loginText\">LOGIN◀</string>\r\n\r\n    <!-- Login Activity -->\r\n    <string name=\"login\">Log in</string>\r\n    <string name=\"loginButton\">LOGIN</string>\r\n    <string name=\"forgotPassword\">Forgot Password?</string>\r\n    <string name=\"noAccount\">Don\\'t have an account?</string>\r\n    <string name=\"registerText\">REGISTER◀</string>\r\n    <string name=\"invalidEmail\">Please enter a valid email address</string>\r\n    <string name=\"emptyPassword\">The password cannot be empty</string>\r\n\r\n    <!-- Goals Activity -->\r\n    <string name=\"goalsTitle\">Goals</string>\r\n    <string name=\"level\">Level</string>\r\n    <string name =\"exp\">EXP</string>\r\n    <string name=\"create_goal\">Create New</string>\r\n    <string name=\"goals_progress_text\">Goals and Progress</string>\r\n    <string name=\"goal_desc\">Goal description</string>\r\n    <string name=\"goal_date\">Date</string>\r\n    <string name=\"goal_exp\">Goal EXP</string>\r\n    <string name=\"goal_exp_format\">+%1$d EXP</string>\r\n\r\n    <!-- OnBoarding Activity -->\r\n    <string name=\"skip\">Skip</string>\r\n    <string name=\"next\">Next</string>\r\n    <string name=\"welcome\">Welcome to</string>\r\n    <string name=\"tagline\">Manage expenses, set goals, and track progress!</string>\r\n    <string name=\"title1\">Take hold of your finances</string>\r\n    <string name=\"onboarding1\">Stay on top by effortlessly tracking your subscriptions &amp; bills</string>\r\n    <string name=\"title2\">Set and achieve financial goals</string>\r\n    <string name=\"onboarding2\">Set your financial goals and track progress</string>\r\n    <string name=\"title3\">Log your expenses with ease</string>\r\n    <string name=\"onboarding3\">Quickly log an expense by using the smart receipt scanning feature</string>\r\n    <string name=\"welcomeUser\">Welcome, User!</string>\r\n    <string name=\"welcomeDesc\">Everything went well and Cash Quest is ready to work with you</string>\r\n\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision 384cd036ce804240249457c3dc61b04a26de6163)
++++ b/app/src/main/res/values/strings.xml	(date 1733090570482)
+@@ -1,5 +1,5 @@
+ <resources>
+-    <string name="app_name">Cash Quest</string>
++
+     <string name="title_expenses">Expenses</string>
+     <string name="title_insights">Insights</string>
+     <string name="title_placeholder">Add</string>
+Index: app/src/main/res/mipmap-hdpi/ic_launcher_round.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/mipmap-hdpi/ic_launcher_round.xml b/app/src/main/res/mipmap-hdpi/ic_launcher_round.xml
+new file mode 100644
+--- /dev/null	(date 1733090570494)
++++ b/app/src/main/res/mipmap-hdpi/ic_launcher_round.xml	(date 1733090570494)
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
++    <background android:drawable="@color/ic_launcher_background"/>
++    <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
++</adaptive-icon>
+\ No newline at end of file
