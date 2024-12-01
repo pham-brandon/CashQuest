@@ -13,6 +13,20 @@
         android:theme="@style/Theme.Personal_Finance_App"
         tools:targetApi="31">
 
+        <!-- Firebase Analytics -->
+        <meta-data
+            android:name="com.google.firebase.analytics.APP_ID"
+            android:value="@string/google_app_id" />
+        <meta-data
+            android:name="com.google.firebase.analytics.API_KEY"
+            android:value="@string/google_api_key" />
+
+        <!-- Firebase Services -->
+        <meta-data
+            android:name="com.google.firebase.database.URL"
+            android:value="@string/firebase_database_url" />
+
+        <!-- Your app activities -->
         <activity android:name=".ui.Onboarding.OnboardingActivity" />
         <activity android:name=".ui.Onboarding.WelcomeActivity" />
         <activity android:name=".ui.Onboarding.SuccessfulRegistration" />
@@ -20,23 +34,20 @@
         <activity
             android:name=".GoalsActivity"
             android:exported="true">
-
         </activity>
 
         <activity
             android:name=".RegisterActivity"
             android:exported="true">
-
         </activity>
 
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
