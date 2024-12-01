@@ -4,12 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MilestonesActivity extends AppCompatActivity {
+    private RecyclerView milestonesRecyclerView;
+    private MilestoneAdapter milestoneAdapter;
+    private List<Milestone> milestones;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +27,22 @@ public class MilestonesActivity extends AppCompatActivity {
 
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
+    // Initialize RecyclerView
+        milestonesRecyclerView = findViewById(R.id.milestones_recycler_view);
+        milestonesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // Initialize milestones list
+        milestones = new ArrayList<>();
+        milestones.add(new Milestone("Novice Saver", "Tracked finances for 5 days", true, R.drawable.ic_novice_saver, R.drawable.ic_novice_saver_locked));
+        milestones.add(new Milestone("Seasoned Financier", "Tracked finances for 15 days", false, R.drawable.ic_seasoned_financier, R.drawable.ic_seasoned_financier_locked));
+        milestones.add(new Milestone("Receipt Hunter", "Scan 5 receipts", true, R.drawable.ic_receipt_hunter, R.drawable.ic_receipt_hunter_locked));
+        milestones.add(new Milestone("Treasure Hoarder", "Scan 15 receipts", false, R.drawable.ic_treasure_hoarder, R.drawable.ic_treasure_hoarder_locked));
+        milestones.add(new Milestone("Goal Getter", "Completed 5 goals", true, R.drawable.ic_goal_getter, R.drawable.ic_goal_getter_locked));
+        milestones.add(new Milestone("Budget Hustler", "Completed 15 goals", false, R.drawable.ic_budget_hustler, R.drawable.ic_budget_hustler_locked));
+
+        // Set up adapter
+        milestoneAdapter = new MilestoneAdapter(this, milestones);
+        milestonesRecyclerView.setAdapter(milestoneAdapter);
 
         // Set selected item for the current activity
         navView.setSelectedItemId(R.id.menu_milestones);
