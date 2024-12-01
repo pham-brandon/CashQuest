@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/user_profile_background"
+    android:padding="16dp">
+
+    <!-- Profile Information Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Avatar -->
+        <ImageView
+            android:id="@+id/avatarImageView"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/white"
+            android:contentDescription="User Avatar"
+            android:background="@drawable/avatar_background"
+            android:src="@drawable/default_avatar" />
+
+        <!-- Username and Level -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/usernameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jersey"
+                android:text="JohnDoe_01"
+                android:textSize="32sp"
+                android:textColor="#151940" />
+
+            <TextView
+                android:id="@+id/exp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXP"
+                android:fontFamily="@font/jersey"
+                android:textSize="24sp"
+                android:drawableLeft="@drawable/ic_xp"
+                android:textColor="#151940" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_marginTop="4dp"
+                android:max="100"
+                android:progress="50"
+                android:padding="2dp"
+                android:progressDrawable="@drawable/custom_progress_bar" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/levelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="lvl: 3"
+            android:fontFamily="@font/jersey"
+            android:textSize="18sp"
+            android:padding="0dp"
+            android:textColor="#53598E" />
+    </LinearLayout>
+
+</FrameLayout>

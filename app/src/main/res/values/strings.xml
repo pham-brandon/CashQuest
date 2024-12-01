@@ -52,6 +52,11 @@
     <string name="welcomeUser">Welcome, User!</string>
     <string name="welcomeDesc">Everything went well and Cash Quest is ready to work with you</string>
 
+    <!-- Side menu items -->
+    <string name="editProfile">Edit Profile</string>
+    <string name="stats">Stats</string>
+    <string name="expenses">Expenses</string>
+    <string name="logout">Log out</string>
 
     <!-- Milestones Activity -->
     <string name="milestones_and_achievements_title">Milestones and Achievements</string>

@@ -56,9 +56,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/retro_font"
+                android:text="@string/exp"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/star_goal_24dp" />
 
             <!-- Progress Bar -->
             <ProgressBar
@@ -68,6 +70,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="8dp"
                 android:max="100"
+                android:progress="50"
                 android:progressTint="@color/yellow" />
         </LinearLayout>
     </LinearLayout>
