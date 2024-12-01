@@ -2,6 +2,8 @@ package com.personal_finance_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -39,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         confirmPasswordEditText = findViewById(R.id.confirmPassword);
         registerButton = findViewById(R.id.registerButton);
-
+        Button LoginButton = findViewById(R.id.loginLinkButton);
         // Set register button click listener
         registerButton.setOnClickListener(v -> {
             if (!validateRegistration()) {
