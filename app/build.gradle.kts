@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.gms.google-services") // Firebase plugin
 }
 
 android {
@@ -33,6 +32,8 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    buildToolsVersion = "33.0.1"
+    ndkVersion = "26.1.10909125"
 }
 
 dependencies {
@@ -44,6 +45,7 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.activity)
+    implementation(libs.play.services.mlkit.text.recognition)
 
     // Firebase dependencies
     implementation(platform("com.google.firebase:firebase-bom:32.1.0"))
@@ -53,6 +55,12 @@ dependencies {
 
     // Test dependencies
     testImplementation(libs.junit)
+    testImplementation("mysql:mysql-connector-java:8.0.29")
+    testImplementation("org.mockito:mockito-core:4.0.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    implementation("com.google.code.gson:gson:2.8.9")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation ("com.google.mlkit:text-recognition:16.0.1")
+
 }
