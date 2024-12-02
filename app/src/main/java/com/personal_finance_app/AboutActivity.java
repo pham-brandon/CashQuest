@@ -18,9 +18,6 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        TextView featuresDesc = findViewById(R.id.textView_features_desc);
-        featuresDesc.setText(Html.fromHtml(getString(R.string.about_features), Html.FROM_HTML_MODE_COMPACT));
-
 
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);

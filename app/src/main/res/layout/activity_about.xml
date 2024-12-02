@@ -95,7 +95,10 @@
                 android:textColor="@color/white"
                 android:lineSpacingExtra="6dp"
                 android:textSize="16sp"
-                android:letterSpacing="0.03"/>
+                android:letterSpacing="0.03"
+                android:breakStrategy="balanced"
+                android:maxLines="20"
+                android:scrollHorizontally="false"/>
 
             <TextView
                 android:id="@+id/textView_conclusion"

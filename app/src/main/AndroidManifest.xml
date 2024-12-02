@@ -31,7 +31,6 @@
         <activity android:name=".ui.Onboarding.OnboardingActivity" android:exported="true" />
         <activity android:name=".ui.Onboarding.WelcomeActivity" android:exported="true" />
         <activity android:name=".ui.Onboarding.SuccessfulRegistration" android:exported="true" />
-        <activity android:name=".HelpActivity" android:exported="true" />
         <activity android:name=".AboutActivity" android:exported="true" />
         <activity android:name=".GoalsActivity" android:exported="true" />
         <activity android:name=".RegisterActivity" android:exported="true" />
