@@ -7,14 +7,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.personal_finance_app.ui.Onboarding.SuccessfulRegistration;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText emailField, passwordField;
@@ -27,38 +30,32 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        // Bind UI elements
         emailField = findViewById(R.id.emailLogin);
         passwordField = findViewById(R.id.passwordLogin);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
         forgotPasswordButton = findViewById(R.id.forgotPassword);
 
-        // Set up login button click listener
         loginButton.setOnClickListener(v -> loginUser());
-
-        // Navigate to RegisterActivity when the register button is clicked
         registerButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
+            finish();
         });
 
-        // Forgot password button click listener
         forgotPasswordButton.setOnClickListener(v -> {
             String email = emailField.getText().toString().trim();
             if (email.isEmpty()) {
-                Snackbar.make(v, "Please enter your email address", Snackbar.LENGTH_LONG).show();
+                Toast.makeText(this, "Please enter your email address", Toast.LENGTH_LONG).show();
             } else {
-                // Send password reset email
                 mAuth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                Snackbar.make(v, "Check your email for password reset instructions", Snackbar.LENGTH_LONG).show();
+                                Toast.makeText(this, "Check your email for password reset instructions", Toast.LENGTH_LONG).show();
                             } else {
-                                Snackbar.make(v, "Failed to send reset email. Try again.", Snackbar.LENGTH_LONG).show();
+                                Toast.makeText(this, "Failed to send reset email. Try again.", Toast.LENGTH_LONG).show();
                             }
                         });
             }
@@ -69,29 +66,46 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailField.getText().toString().trim();
         String password = passwordField.getText().toString().trim();
 
-        // Validate email format
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailField.setError("Invalid email format");
             return;
         }
 
-        // Validate password field
         if (password.isEmpty()) {
             passwordField.setError("Password cannot be empty");
             return;
         }
 
-        // Attempt to sign in with email and password
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Login successful
-                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        if (currentUser != null) {
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                                    .getReference("users")
+                                    .child(currentUser.getUid());
+
+                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot snapshot) {
+                                    if (snapshot.exists()) {
+                                        String username = snapshot.child("username").getValue(String.class);
+                                        Intent intent = new Intent(LoginActivity.this, SuccessfulRegistration.class);
+                                        intent.putExtra("USER_NAME", username);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "User data not found.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    Toast.makeText(LoginActivity.this, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
                     } else {
-                        // Login failed
                         Toast.makeText(LoginActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
