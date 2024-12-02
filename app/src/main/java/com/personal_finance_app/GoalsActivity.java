@@ -78,6 +78,10 @@ public class GoalsActivity extends AppCompatActivity {
                 startActivity(new Intent(this, ExpensesActivity.class));
                 return true;
             }
+            if (item.getItemId() == R.id.menu_insights) {
+                startActivity(new Intent(this, InsightsActivity.class));
+                return true;
+            }
             if (item.getItemId() == R.id.menu_milestones) {
                 startActivity(new Intent(this, MilestonesActivity.class));
                 return true;
