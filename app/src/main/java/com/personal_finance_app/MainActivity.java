@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -16,9 +14,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.personal_finance_app.databinding.ActivityMainBinding;
-import com.personal_finance_app.ui.Onboarding.WelcomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,70 +26,70 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Intent intent = new Intent(this, GoalsActivity.class);
-        //startActivity(intent);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        FloatingActionButton centerFab = findViewById(R.id.fab_add);
-        centerFab.setVisibility(View.VISIBLE);
-        centerFab.setOnClickListener(v -> {
-            // Navigate to a new activity or perform an action
-            Intent intent = new Intent(MainActivity.this, AddExpense.class); // Replace with the desired activity
-            startActivity(intent);
-        });
+        if (checkUserAuthentication()) {
+            initializeUI();
+            setupBottomNavigation();
+        }
+    }
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.menu_expenses, R.id.menu_insights, R.id.menu_milestones, R.id.menu_goals)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-
-        // Set a listener for navigation item clicks
-        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-
-                if (id == R.id.menu_expenses) {
-                    // Navigate to ExpensesActivity
-                    startActivity(new Intent(MainActivity.this, ExpensesActivity.class));
-                    return true;
-                } else if (id == R.id.menu_insights) {
-                    // Navigate to InsightsActivity
-                    startActivity(new Intent(MainActivity.this, InsightsActivity.class));
-                    return true;
-                } else if (id == R.id.menu_milestones) {
-                    // Navigate to MilestonesActivity
-                    startActivity(new Intent(MainActivity.this, MilestonesActivity.class));
-                    return true;
-                } else if (id == R.id.menu_goals) {
-                    // Navigate to GoalsActivity
-                    startActivity(new Intent(MainActivity.this, GoalsActivity.class));
-                    return true;
-                }
-                return false;
-            }
-        });
-
+    private boolean checkUserAuthentication() {
         SharedPreferences prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         boolean onboardingComplete = prefs.getBoolean("onboarding_complete", false);
 
         if (onboardingComplete) {
-            // Onboarding is complete, proceed to RegistrationActivity
-            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             finish();
-        } else {
-            // Show WelcomeActivity
-            Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-            startActivity(intent);
-            finish();
+            return false;
         }
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
+            return false;
+        }
+
+        return true;
+    }
+
+    private void initializeUI() {
+        FloatingActionButton centerFab = findViewById(R.id.fab_add);
+        centerFab.setVisibility(View.VISIBLE);
+        centerFab.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddExpense.class);
+            startActivity(intent);
+        });
+    }
+
+    private void setupBottomNavigation() {
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.menu_expenses, R.id.menu_insights, R.id.menu_milestones, R.id.menu_goals)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        NavigationUI.setupWithNavController(binding.navView, navController);
+
+        navView.setOnNavigationItemSelectedListener(this::handleNavigation);
+    }
+
+    private boolean handleNavigation(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_expenses) {
+            startActivity(new Intent(MainActivity.this, ExpensesActivity.class));
+        } else if (id == R.id.menu_insights) {
+            startActivity(new Intent(MainActivity.this, InsightsActivity.class));
+        } else if (id == R.id.menu_milestones) {
+            startActivity(new Intent(MainActivity.this, MilestonesActivity.class));
+        } else if (id == R.id.menu_goals) {
+            startActivity(new Intent(MainActivity.this, GoalsActivity.class));
+        } else {
+            return false;
+        }
+        return true;
     }
 }

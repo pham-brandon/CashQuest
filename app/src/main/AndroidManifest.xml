@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,42 +16,35 @@
         android:theme="@style/Theme.Personal_Finance_App"
         tools:targetApi="31">
 
-        <!-- Firebase Analytics -->
+        <!-- Firebase Configuration -->
         <meta-data
             android:name="com.google.firebase.analytics.APP_ID"
             android:value="@string/google_app_id" />
         <meta-data
             android:name="com.google.firebase.analytics.API_KEY"
             android:value="@string/google_api_key" />
-
-        <!-- Firebase Services -->
         <meta-data
             android:name="com.google.firebase.database.URL"
             android:value="@string/firebase_database_url" />
 
-        <!-- Your app activities -->
-        <activity android:name=".ui.Onboarding.OnboardingActivity" />
-        <activity android:name=".ui.Onboarding.WelcomeActivity" />
-        <activity android:name=".ui.Onboarding.SuccessfulRegistration" />
-        <activity android:name=".HelpActivity" />
-        <activity android:name=".AboutActivity" />
+        <!-- Activities -->
+        <activity android:name=".ui.Onboarding.OnboardingActivity" android:exported="true" />
+        <activity android:name=".ui.Onboarding.WelcomeActivity" android:exported="true" />
+        <activity android:name=".ui.Onboarding.SuccessfulRegistration" android:exported="true" />
+        <activity android:name=".HelpActivity" android:exported="true" />
+        <activity android:name=".AboutActivity" android:exported="true" />
+        <activity android:name=".GoalsActivity" android:exported="true" />
+        <activity android:name=".RegisterActivity" android:exported="true" />
+        <activity android:name=".OCRTestActivity" android:exported="true" />
+        <activity android:name=".AddExpenseActivity" android:exported="true" />
+        <activity android:name=".LoginActivity" android:exported="true" />
+        <activity android:name=".ExpensesActivity" android:exported="true" />
+        <activity android:name=".InsightsActivity" android:exported="true" />
+        <activity android:name=".AddExpense" android:exported="true" />
+        <activity android:name=".MilestonesActivity" android:exported="true" />
+        <activity android:name=".EditProfileActivity" android:exported="true" />
 
-        <activity
-            android:name=".GoalsActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".OCRTestActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AddExpenseActivity"
-            android:exported="true" />
+        <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -60,27 +54,5 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".ExpensesActivity"
-            android:exported="true" />
-        <activity
-            android:name=".InsightsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AddExpense"
-            android:exported="true" />
-        <activity
-            android:name=".MilestonesActivity"
-            android:exported="true" />
-        <activity
-            android:name=".EditProfileActivity"
-            android:exported="true" />
-
-
     </application>
-
 </manifest>
