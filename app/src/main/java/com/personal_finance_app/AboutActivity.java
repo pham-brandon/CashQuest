@@ -2,7 +2,10 @@ package com.personal_finance_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,6 +18,8 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        TextView featuresDesc = findViewById(R.id.textView_features_desc);
+        featuresDesc.setText(Html.fromHtml(getString(R.string.about_features), Html.FROM_HTML_MODE_COMPACT));
 
 
         // Initialize BottomNavigationView
@@ -28,7 +33,7 @@ public class AboutActivity extends AppCompatActivity {
             int itemId = item.getItemId();
 
             if (itemId == R.id.menu_expenses) {
-                // Current activity
+                startActivity(new Intent(this, ExpensesActivity.class));
                 return true;
             } else if (itemId == R.id.menu_insights) {
                 startActivity(new Intent(this, InsightsActivity.class));

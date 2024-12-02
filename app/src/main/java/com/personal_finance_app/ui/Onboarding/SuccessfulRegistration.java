@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.personal_finance_app.ExpensesActivity;
 import com.personal_finance_app.GoalsActivity;
 import com.personal_finance_app.R;
 
@@ -41,7 +43,7 @@ public class SuccessfulRegistration extends AppCompatActivity {
     }
 
     private void launchHomeActivity() {
-        Intent intent = new Intent(SuccessfulRegistration.this, GoalsActivity.class);
+        Intent intent = new Intent(SuccessfulRegistration.this, ExpensesActivity.class);
         startActivity(intent);
         finish();
     }

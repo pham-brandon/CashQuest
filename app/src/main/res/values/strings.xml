@@ -88,4 +88,13 @@
 
     <string name="milestonesTitle">Milestones and Achievements</string>
 
+    <!-- About Activity -->
+    <string name="about_app" >About CashQuest</string>
+    <string name="intro_about" >Embark on an adventure to conquer your finances with CashQuest, the game-like budgeting app that turns personal finance into an engaging journey.</string>
+    <string name="about_middle">Set your sights on achieving financial goals while leveling up your skills, just like in a game. Whether you’re tracking expenses, managing income, or strategizing your next financial move, CashQuest makes every step of the journey fun and rewarding.</string>
+    <string name="more_about">CashQuest is more than a budgeting app—it\'s your personal financial companion, equipped with tools to:</string>
+    <string name="about_features">‣ Set and Achieve Goals: Define your financial objectives and work towards them.\n‣ Track Income and Expenses: Easily log and categorize your spending.\n‣ Visualize Progress: View intuitive graphs that give you actionable insights into your spending habits.\n‣ Earn Rewards: Stay motivated with badges, EXP points, and quests that make financial management a game you’ll want to win.</string>
+    <string name="about_conclusion">Transform your financial future one level at a time—CashQuest makes it easy, fun, and effective. Join us today and start your quest toward financial mastery!"</string>
+    <!-- Help Activity -->
+
 </resources>
