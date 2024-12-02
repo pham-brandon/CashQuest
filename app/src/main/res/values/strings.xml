@@ -95,6 +95,16 @@
     <string name="more_about">CashQuest is more than a budgeting app—it\'s your personal financial companion, equipped with tools to:</string>
     <string name="about_features">‣ Set and Achieve Goals: Define your financial objectives and work towards them.\n‣ Track Income and Expenses: Easily log and categorize your spending.\n‣ Visualize Progress: View intuitive graphs that give you actionable insights into your spending habits.\n‣ Earn Rewards: Stay motivated with badges, EXP points, and quests that make financial management a game you’ll want to win.</string>
     <string name="about_conclusion">Transform your financial future one level at a time—CashQuest makes it easy, fun, and effective. Join us today and start your quest toward financial mastery!"</string>
+
     <!-- Help Activity -->
 
+    <!-- Expense Activitiy -->
+    <string name="create">Create</string>
+    <string name="amount">Amount</string>
+    <string name="expense_title">Expense Title</string>
+    <string name="add_manually">Add Manually</string>
+    <string name="capture_receipt">Capture Receipt</string>
+    <string name="upload_receipt">Upload Receipt</string>
+    <string name="scan_receipt">Scan a Receipt</string>
+    <string name="add_expense">Add an Expense</string>
 </resources>

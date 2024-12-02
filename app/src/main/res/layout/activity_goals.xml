@@ -52,8 +52,7 @@
         android:layout_width="117dp"
         android:layout_height="53dp"
         android:layout_marginTop="24dp"
-        android:background="@color/light_purple"
-        android:backgroundTint="@color/blue"
+        android:background="@drawable/rounded_button"
         android:fontFamily="@font/retro_font"
         android:text="@string/create_new"
         android:textColor="@android:color/white"
@@ -65,8 +64,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/goals_recycler_view"
-        android:layout_width="420dp"
-        android:layout_height="536dp"
+        android:layout_width="match_parent"
+        android:layout_height="530dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
         android:nestedScrollingEnabled="false"

@@ -1,5 +1,6 @@
 package com.personal_finance_app;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,8 +40,8 @@ public class SideMenuFragment extends Fragment {
                     startActivity(new Intent(getActivity(), EditProfileActivity.class));
                     return true;
                 } else if (itemId == R.id.help) {
-                    // Navigate to Stats
-                    startActivity(new Intent(getActivity(), HelpActivity.class));
+                    // Navigate to help info (required by project to be a dialog)
+                    showHelpDialog();
                     return true;
                 } else if (itemId == R.id.about) {
                     // Navigate to Expenses
@@ -63,5 +64,24 @@ public class SideMenuFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void showHelpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Help");
+
+        // Authors name, version, and instructions
+        builder.setMessage("Authors: Salam Al-Rifaie, An Pham, Darren Lee, Zahra Mohamed, Brandon Pham\n" +
+                "Version: 1.0\n" +
+                "Instructions:\n" +
+                "1. Use bottom toolbar to navigate.\n" +
+                "2. Set goals and track expenses.\n" +
+                "3. Earn rewards as you progress in managing your finances.");
+
+        builder.setPositiveButton("OK", (dialog, which) -> {
+        });
+
+        // Show the dialog
+        builder.show();
     }
 }

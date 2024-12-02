@@ -29,6 +29,29 @@
         app:layout_constraintStart_toStartOf="@id/help_activity"
         app:layout_constraintTop_toBottomOf="@id/side_menu_fragment" />
 
+    <!-- Help Content -->
+    <ScrollView
+        android:id="@+id/help_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textView3"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/help_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:lineSpacingExtra="4dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:fontFamily="@font/pixelify_sans"
+            android:text="Author: John Doe\nVersion: 1.0.0\n\nInstructions:\n• Navigate using the bottom menu.\n• Use the side menu for additional options.\n• Tap the floating action button to add new items.\n• Explore detailed views in each section for insights." />
+    </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"

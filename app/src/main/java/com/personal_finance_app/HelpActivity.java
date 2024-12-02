@@ -16,10 +16,8 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
 
         // Set selected item for the current activity
         navView.setSelectedItemId(R.id.menu_expenses);

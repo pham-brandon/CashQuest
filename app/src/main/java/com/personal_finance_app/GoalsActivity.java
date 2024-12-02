@@ -76,14 +76,17 @@ public class GoalsActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.menu_goals) return true;
             if (item.getItemId() == R.id.menu_expenses) {
                 startActivity(new Intent(this, ExpensesActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             }
             if (item.getItemId() == R.id.menu_insights) {
                 startActivity(new Intent(this, InsightsActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             }
             if (item.getItemId() == R.id.menu_milestones) {
                 startActivity(new Intent(this, MilestonesActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             }
             return false;
