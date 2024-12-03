@@ -4,7 +4,6 @@ package com.personal_finance_app;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -20,8 +19,7 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 
 import android.net.Uri;
@@ -116,16 +114,38 @@ public class OCRTestActivity extends AppCompatActivity {
 
     private String extractTotal(String text) {
         String[] lines = text.split("\n");
+        String potentialTotal = null;
+        double maxValue = 0.0;
+
         for (String line : lines) {
-            if (line.matches("(?i).*\\b(total|amount|balance|gratuity|invoice|payment)\\b.*")) {
+            if (line.matches("(?i).*\\b(total|amount|balance|gratuity|invoice|payment|due)\\b.*")) {
                 String possibleAmount = extractNumberFromLine(line);
                 if (possibleAmount != null) {
-                    return possibleAmount;
+                    double value = Double.parseDouble(possibleAmount);
+                    if (value > maxValue) {
+                        maxValue = value;
+                        potentialTotal = possibleAmount;
+                    }
                 }
             }
         }
-        return null;
+
+        if (potentialTotal == null) {
+            for (String line : lines) {
+                String possibleAmount = extractNumberFromLine(line);
+                if (possibleAmount != null) {
+                    double value = Double.parseDouble(possibleAmount);
+                    if (value > maxValue) {
+                        maxValue = value;
+                        potentialTotal = possibleAmount;
+                    }
+                }
+            }
+        }
+
+        return potentialTotal;
     }
+
 
     private String extractNumberFromLine(String line) {
         String[] tokens = line.split("\\s+");
