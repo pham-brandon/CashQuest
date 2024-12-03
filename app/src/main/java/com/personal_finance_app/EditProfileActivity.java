@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
 
+import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class EditProfileActivity extends AppCompatActivity {
@@ -75,11 +76,17 @@ public class EditProfileActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("user_name", username); // Save updated username
             editor.apply(); // Commit the changes
+            UserProfileFragment userProfileFragment = (UserProfileFragment) getSupportFragmentManager().findFragmentById(R.id.user_profile_fragment);
+
             // Notify the UserProfileFragment to update the UI (reload data)
             if (userProfileFragment != null) {
                 userProfileFragment.updateUsername(username);
             }
             showToast("Profile updated successfully");
+
+            // Send the updated username back to ExpensesActivity
+            Intent intent = new Intent(EditProfileActivity.this, ExpensesActivity.class);
+            startActivity(intent); // Launch ExpensesActivity
             finish(); // Close activity after saving
 
         } else {
