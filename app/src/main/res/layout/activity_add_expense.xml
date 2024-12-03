@@ -86,9 +86,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#C0ACEB"
-                android:fontFamily="@font/pixelify_sans"
+                android:fontFamily="@font/retro_font"
                 android:hint="@string/expense_title"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="20sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -104,10 +105,11 @@
                 android:layout_height="match_parent"
                 android:autofillHints="0.00"
                 android:background="#C0ACEB"
-                android:fontFamily="@font/pixelify_sans"
+                android:fontFamily="@font/retro_font"
                 android:hint="@string/amount"
                 android:inputType="numberDecimal"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="20sp"/>
         </LinearLayout>
 
         <LinearLayout
