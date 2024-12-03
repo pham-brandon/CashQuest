@@ -10,10 +10,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class AddExpenseActivity extends AppCompatActivity {
@@ -41,6 +48,9 @@ public class AddExpenseActivity extends AppCompatActivity {
 
         List<Expense> expenses = new ArrayList<>();
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
         createExpenseButton.setOnClickListener(v -> {
             String title = expenseTitle.getText().toString().trim();
             String amountStr = amount.getText().toString().trim();
@@ -48,20 +58,34 @@ public class AddExpenseActivity extends AppCompatActivity {
             if (title.isEmpty() || amountStr.isEmpty()) {
                 Toast.makeText(AddExpenseActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
-                // Get the selected expense type and bill frequency
                 String selectedExpenseType = expenseType.getSelectedItem().toString();
                 String selectedBillFrequency = billFrequency.getSelectedItem().toString();
 
-                // Create a new Expense object
-                Expense newExpense = new Expense(title, Double.parseDouble(amountStr), selectedExpenseType, selectedBillFrequency);
+                Map<String, Object> expenseData = new HashMap<>();
+                expenseData.put("title", title);
+                expenseData.put("amount", Double.parseDouble(amountStr));
+                expenseData.put("expenseType", selectedExpenseType);
+                expenseData.put("billFrequency", selectedBillFrequency);
 
-                // Send the new expense back to the ExpensesActivity
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("newExpense", newExpense);
-                setResult(RESULT_OK, resultIntent);
-                finish(); // Close AddExpenseActivity and return to ExpensesActivity
+                FirebaseUser user = auth.getCurrentUser();
+                if (user != null) {
+                    String uid = user.getUid();
+
+                    db.collection("users").document(uid).collection("expenses")
+                            .add(expenseData)
+                            .addOnSuccessListener(documentReference -> {
+                                Toast.makeText(AddExpenseActivity.this, "Expense saved successfully", Toast.LENGTH_SHORT).show();
+                                finish();
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(AddExpenseActivity.this, "Failed to save expense: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                } else {
+                    Toast.makeText(AddExpenseActivity.this, "User not logged in", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
 
         uploadReceiptButton.setOnClickListener(v -> {
             openGallery();

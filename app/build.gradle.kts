@@ -52,6 +52,9 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.1.0")
     implementation("com.google.firebase:firebase-auth:21.3.0")
     implementation("com.google.firebase:firebase-analytics:21.2.2")
+    implementation("com.google.firebase:firebase-firestore:24.9.0")
+
+
 
     // Test dependencies
     testImplementation(libs.junit)
