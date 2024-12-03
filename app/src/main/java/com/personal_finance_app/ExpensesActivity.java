@@ -29,6 +29,7 @@ public class ExpensesActivity extends AppCompatActivity {
 
         // Get EXP and Level from preferences
         SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
+        String username = prefs.getString("user_name", "User");
         int exp = prefs.getInt("user_exp", 0);
         int level = prefs.getInt("user_level", 1);
 
@@ -36,7 +37,7 @@ public class ExpensesActivity extends AppCompatActivity {
         if (userProfileFragment != null) {
             int progress = exp % 15;
             int progressPercentage = (progress * 100) / 15;
-            userProfileFragment.updateUserProfile(level + 1, progressPercentage);
+            userProfileFragment.updateUserProfile(level + 1, progressPercentage, username);
         }
 
         // Initialize BottomNavigationView
@@ -71,7 +72,7 @@ public class ExpensesActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(view -> {
             // Navigate to the desired page
-            Intent intent = new Intent(this, AddExpense.class);
+            Intent intent = new Intent(this, AddExpenseActivity.class);
             startActivity(intent);
             overridePendingTransition(0, 0); // No animation
         });

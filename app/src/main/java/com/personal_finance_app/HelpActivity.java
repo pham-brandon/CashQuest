@@ -2,26 +2,22 @@ package com.personal_finance_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
-public class AboutActivity extends AppCompatActivity {
+public class HelpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+        //setContentView(R.layout.activity_help);
 
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
 
         // Set selected item for the current activity
         navView.setSelectedItemId(R.id.menu_expenses);
@@ -30,7 +26,7 @@ public class AboutActivity extends AppCompatActivity {
             int itemId = item.getItemId();
 
             if (itemId == R.id.menu_expenses) {
-                startActivity(new Intent(this, ExpensesActivity.class));
+                // Current activity
                 return true;
             } else if (itemId == R.id.menu_insights) {
                 startActivity(new Intent(this, InsightsActivity.class));

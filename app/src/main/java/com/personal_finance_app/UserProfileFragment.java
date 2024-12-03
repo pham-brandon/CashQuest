@@ -34,33 +34,55 @@ public class UserProfileFragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
 
         // Set up default values (replace with dynamic data)
-        avatarImageView.setImageResource(R.drawable.default_avatar);
-        usernameTextView.setText("JohnDoe_01");
-        levelTextView.setText("lvl: 3");
-        progressBar.setProgress(50); // Set progress dynamically based on user's level progress
+        avatarImageView.setImageResource(R.drawable.default_avatar); // Default avatar
+        levelTextView.setText("lvl: 1"); // Default level
+        progressBar.setProgress(0); // Default progress
+        usernameTextView.setText("User");
+
+        // Retrieve the username from SharedPreferences
+        SharedPreferences preferences = getActivity().getSharedPreferences("personal_finance_prefs", getActivity().MODE_PRIVATE);
+        String username = preferences.getString("user_name", "User"); // Default value: "User"
+
 
         return view;
     }
 
+
     public void setUserProfile(String username, int level, int progress, int avatarResId) {
-        // Update UI components
+        if (usernameTextView != null) {
+            usernameTextView.setText(username);
+        }
+        if (levelTextView != null) {
+            levelTextView.setText("lvl: " + level);
+        }
+        if (progressBar != null) {
+            progressBar.setProgress(progress);
+        }
+        if (avatarImageView != null) {
+            avatarImageView.setImageResource(avatarResId);
+        }
+
+        // Save data to SharedPreferences for persistence
+        if (getActivity() != null) {
+            SharedPreferences preferences = getActivity().getSharedPreferences("personal_finance_prefs", getActivity().MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+
+            editor.putString("user_name", username);
+            editor.putInt("user_level", level);
+            editor.putInt("user_exp", progress);
+            editor.apply();
+        }
+    }
+
+    public void updateUserProfile(int level, int progress, String username) {
         usernameTextView.setText(username);
         levelTextView.setText("lvl: " + level);
         progressBar.setProgress(progress);
-        avatarImageView.setImageResource(avatarResId);
 
-        // Save data to SharedPreferences
-        SharedPreferences preferences = getActivity().getSharedPreferences("personal_finance_prefs", getActivity().MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-
-        editor.putInt("user_level", level);
-        editor.putInt("user_exp", progress); // Assuming progress is equivalent to EXP
-        editor.apply();  // Commit changes
     }
 
-    public void updateUserProfile(int level, int progress) {
-        levelTextView.setText("lvl: " + level);
-        progressBar.setProgress(progress);
+    public void updateUsername(String username){
+        usernameTextView.setText(username);
     }
 
 }

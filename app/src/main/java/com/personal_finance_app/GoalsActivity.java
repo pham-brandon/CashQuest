@@ -36,6 +36,9 @@ public class GoalsActivity extends AppCompatActivity {
     private int lastEXP = -1;
     private UserProfileFragment userProfileFragment;
 
+    private static final String PREFS_NAME = "GoalsPrefs";
+    private static final String GOALS_KEY = "goalsList";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,18 +57,21 @@ public class GoalsActivity extends AppCompatActivity {
 
         // Get EXP and Level from preferences
         SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
+        String username = prefs.getString("user_name", "User");
         int exp = prefs.getInt("user_exp", 0);
         int level = prefs.getInt("user_level", 1);
 
+
         // Initialize goals list and RecyclerView
         goalsList = new ArrayList<>();
-        loadGoalsFromPreferences();
+
 
         recyclerView = findViewById(R.id.goals_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         goalsAdapter = new GoalsAdapter(goalsList, this);
         recyclerView.setAdapter(goalsAdapter);
+        loadGoalsFromPreferences();
 
         Button addGoalButton = findViewById(R.id.add_goal_button);
         addGoalButton.setOnClickListener(v -> promptNewGoal());
@@ -94,7 +100,7 @@ public class GoalsActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(view -> {
-            Intent intent = new Intent(this, AddExpense.class);
+            Intent intent = new Intent(this, AddExpenseActivity.class);
             startActivity(intent);
         });
 
@@ -105,8 +111,10 @@ public class GoalsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        loadGoalsFromPreferences();
         int exp = preferencesHelper.getUserExp();
         int level = preferencesHelper.getUserLevel();
+        String username = preferencesHelper.getUsername();
         updateEXPBar(exp);
     }
 
@@ -122,9 +130,10 @@ public class GoalsActivity extends AppCompatActivity {
         preferencesHelper.setUserExp(exp);
         preferencesHelper.setUserLevel(level);
 
+
         // Update the UserProfileFragment with new level and progress
         if (userProfileFragment != null) {
-            userProfileFragment.updateUserProfile(level + 1, progressPercentage); // +1 for 1-based level
+            userProfileFragment.updateUserProfile(level + 1, progressPercentage, preferencesHelper.getUsername()); // +1 for 1-based level
         }
 
         // Debug logs
@@ -179,30 +188,37 @@ public class GoalsActivity extends AppCompatActivity {
     }
 
     private void addGoal(String description, String dueDate) {
-        goalsList.add(new Goal(description, "Due: " + dueDate, 5));
-        goalsAdapter.notifyDataSetChanged();
+        Goal newGoal = new Goal(description, "Due: " + dueDate, 5);
+        goalsList.add(newGoal);
+        goalsAdapter.notifyItemInserted(goalsList.size() - 1);
         saveGoalsToPreferences();
     }
 
     public void saveGoalsToPreferences() {
-        SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        SharedPreferences sharedPreferences = getSharedPreferences("GoalsPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         Gson gson = new Gson();
-        String json = gson.toJson(goalsList);
-
-        editor.putString("goals_list", json);
-        editor.apply();
+        String goalsJson = gson.toJson(goalsList);  // Convert goal list to JSON string
+        editor.putString("goals", goalsJson);
+        editor.apply();  // Save the data
     }
 
-    private void loadGoalsFromPreferences() {
-        SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
-        String json = prefs.getString("goals_list", null);
+    public void loadGoalsFromPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("GoalsPrefs", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String goalsJson = sharedPreferences.getString("goals", null);
 
-        if (json != null) {
-            Gson gson = new Gson();
-            Type type = new TypeToken<List<Goal>>() {}.getType();
-            goalsList = gson.fromJson(json, type);
+        if (goalsJson != null) {
+            Type type = new TypeToken<List<Goal>>(){}.getType();
+            List<Goal> loadedGoals = gson.fromJson(goalsJson, type);
+
+            // Clear and update the existing list to maintain the reference
+            goalsList.clear();
+            goalsList.addAll(loadedGoals);
+
+            // Notify the adapter about data changes
+            goalsAdapter.notifyDataSetChanged();
         }
     }
 }
