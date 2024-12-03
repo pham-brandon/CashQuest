@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -41,12 +42,35 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
             holder.amountTextView.setText(String.format("$%.2f", expense.getAmount()));
             holder.typeTextView.setText(expense.getType());
             holder.frequencyTextView.setText(expense.getFrequency());
+            holder.iconImageView.setImageResource(getIconForExpenseType(expense.getType()));
         } else {
             // Handle null case or log for debugging
             Log.e("ExpenseAdapter", "Expense at position " + position + " is null.");
         }
     }
 
+
+    // Method to determine which icon to use based on expense type
+    private int getIconForExpenseType(String expenseType) {
+        switch (expenseType) {
+            case "Eating Out":
+                return R.drawable.dinner_expense;
+            case "Entertainment":
+                return R.drawable.entertainment_expense;
+            case "Grocery":
+                return R.drawable.grocery_expense;
+            case "Health":
+                return R.drawable.health_expense;
+            case "Rent":
+                return R.drawable.rent_expense;
+            case "Transportation":
+                return R.drawable.transportation_expense;
+            case "Utilities":
+                return R.drawable.utilities_expense;
+            default:
+                return R.drawable.other_expenses;
+        }
+    }
     @Override
     public int getItemCount() {
         return expenses.size();
@@ -58,6 +82,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         TextView amountTextView;
         TextView typeTextView;
         TextView frequencyTextView;
+        ImageView iconImageView;
 
         public ExpenseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,6 +92,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
             amountTextView = itemView.findViewById(R.id.expense_amount);
             typeTextView = itemView.findViewById(R.id.expense_category);
             frequencyTextView = itemView.findViewById(R.id.billFrequency);
+            iconImageView = itemView.findViewById(R.id.expense_icon);
         }
     }
 }

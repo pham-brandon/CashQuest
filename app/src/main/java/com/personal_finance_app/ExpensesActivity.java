@@ -21,6 +21,7 @@ public class ExpensesActivity extends AppCompatActivity {
     private ExpenseAdapter expenseAdapter;
     private ArrayList<Expense> expenseList = new ArrayList<>();
     private PreferenceHelper preferencesHelper;
+    private static final int ADD_EXPENSE_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +60,9 @@ public class ExpensesActivity extends AppCompatActivity {
         recyclerView.setAdapter(expenseAdapter);
         expenseAdapter.notifyDataSetChanged(); // Refresh the adapter to display data
 
-        // Add some default expenses
+        // manually adding to test
         expenseList.add(new Expense("Rent", 1200.00, "Rent", "Monthly"));
-        expenseList.add(new Expense("Groceries", 250.50, "Grocery", "Weekly"));
+        //expenseList.add(new Expense("Groceries", 250.50, "Grocery", "Weekly"));
 
         // Get the new Expense object passed from AddExpenseActivity
         Intent intent = getIntent();
@@ -94,12 +95,27 @@ public class ExpensesActivity extends AppCompatActivity {
             return false;
         });
 
-        // Add Floating Action Button listener
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(view -> {
             Intent addExpenseIntent = new Intent(this, AddExpenseActivity.class);
-            startActivity(addExpenseIntent);
+            startActivityForResult(addExpenseIntent, ADD_EXPENSE_REQUEST_CODE); // Add request code
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ADD_EXPENSE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            Expense newExpense = (Expense) data.getSerializableExtra("newExpense");
+            if (newExpense != null) {
+                expenseList.add(newExpense);
+                expenseAdapter.notifyDataSetChanged(); // Refresh the adapter
+                Toast.makeText(this, "Expense added: " + newExpense.getTitle(), Toast.LENGTH_SHORT).show();
+            } else {
+                Log.e("ExpensesActivity", "New Expense is null");
+            }
+        }
     }
 
     @Override

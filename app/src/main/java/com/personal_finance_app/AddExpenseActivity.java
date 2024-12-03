@@ -9,7 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
+import java.util.ArrayList;
+import java.util.List;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -38,11 +39,12 @@ public class AddExpenseActivity extends AppCompatActivity {
         uploadReceiptButton = findViewById(R.id.uploadReceiptButton);
         cameraReceiptButton = findViewById(R.id.cameraReceiptButton);
 
+        List<Expense> expenses = new ArrayList<>();
+
         createExpenseButton.setOnClickListener(v -> {
             String title = expenseTitle.getText().toString().trim();
             String amountStr = amount.getText().toString().trim();
 
-            // Check if the title and amount fields are filled
             if (title.isEmpty() || amountStr.isEmpty()) {
                 Toast.makeText(AddExpenseActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
@@ -50,16 +52,14 @@ public class AddExpenseActivity extends AppCompatActivity {
                 String selectedExpenseType = expenseType.getSelectedItem().toString();
                 String selectedBillFrequency = billFrequency.getSelectedItem().toString();
 
-                //save to database...
+                // Create a new Expense object
+                Expense newExpense = new Expense(title, Double.parseDouble(amountStr), selectedExpenseType, selectedBillFrequency);
 
-                // Show a toast with the entered data
-                Toast.makeText(AddExpenseActivity.this,"Expense has been added!", Toast.LENGTH_LONG).show();
-
-                Log.d("AddExpenseActivity", "Expense Title: " + title);
-                Log.d("AddExpenseActivity", "Amount: " + amountStr);
-                Log.d("AddExpenseActivity", "Expense Type: " + selectedExpenseType);
-                Log.d("AddExpenseActivity", "Bill Frequency: " + selectedBillFrequency);
-
+                // Send the new expense back to the ExpensesActivity
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("newExpense", newExpense);
+                setResult(RESULT_OK, resultIntent);
+                finish(); // Close AddExpenseActivity and return to ExpensesActivity
             }
         });
 
