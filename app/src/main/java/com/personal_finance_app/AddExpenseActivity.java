@@ -1,5 +1,6 @@
 package com.personal_finance_app;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -38,13 +39,27 @@ public class AddExpenseActivity extends AppCompatActivity {
         cameraReceiptButton = findViewById(R.id.cameraReceiptButton);
 
         createExpenseButton.setOnClickListener(v -> {
-            String title = expenseTitle.getText().toString();
-            String amountStr = amount.getText().toString();
+            String title = expenseTitle.getText().toString().trim();
+            String amountStr = amount.getText().toString().trim();
 
+            // Check if the title and amount fields are filled
             if (title.isEmpty() || amountStr.isEmpty()) {
                 Toast.makeText(AddExpenseActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(AddExpenseActivity.this, "Expense Added", Toast.LENGTH_SHORT).show();
+                // Get the selected expense type and bill frequency
+                String selectedExpenseType = expenseType.getSelectedItem().toString();
+                String selectedBillFrequency = billFrequency.getSelectedItem().toString();
+
+                //save to database...
+
+                // Show a toast with the entered data
+                Toast.makeText(AddExpenseActivity.this,"Expense has been added!", Toast.LENGTH_LONG).show();
+
+                Log.d("AddExpenseActivity", "Expense Title: " + title);
+                Log.d("AddExpenseActivity", "Amount: " + amountStr);
+                Log.d("AddExpenseActivity", "Expense Type: " + selectedExpenseType);
+                Log.d("AddExpenseActivity", "Bill Frequency: " + selectedBillFrequency);
+
             }
         });
 

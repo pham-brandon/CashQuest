@@ -4,15 +4,36 @@
     <string name="title_notifications">Notifications</string>
 
     <string-array name="expense_types">
-        <item>Food</item>
+        <item>Type</item>
+        <item>Eating Out</item>
+        <item>Transportation</item>
+        <item>Grocery</item>
         <item>Utilities</item>
+        <item>Rent</item>
+        <item>Entertainment</item>
+        <item>Healthcare</item>
+        <item>Education</item>
+        <item>Shopping</item>
+        <item>Subscriptions</item>
+        <item>Insurance</item>
+        <item>Mortgage</item>
+        <item>Debt Payments</item>
+        <item>Charity/Donations</item>
+        <item>Investment</item>
+        <item>Pet Care</item>
+        <item>Travel/Vacation</item>
         <item>Other</item>
     </string-array>
 
     <string-array name="bill_frequencies">
+        <item>Bill Frequency</item>
+        <item>One-time</item>
+        <item>Daily</item>
+        <item>Bi-weekly</item>
         <item>Week</item>
         <item>Month</item>
-        <item>Custom</item>
+        <item>Quarterly</item>
+        <item>Annually</item>
     </string-array>
 
     <string name="app_name">Cash Quest</string>
@@ -102,7 +123,7 @@
 
     <!-- Help Activity -->
 
-    <!-- Expense Activitiy -->
+    <!-- Add Expense Activitiy -->
     <string name="create">Create</string>
     <string name="amount">Amount</string>
     <string name="expense_title">Expense Title</string>
@@ -111,4 +132,9 @@
     <string name="upload_receipt">Upload Receipt</string>
     <string name="scan_receipt">Scan a Receipt</string>
     <string name="add_expense">Add an Expense</string>
+    <string name="bill_freq">Bill Frequency</string>
+    <string name="type">Type</string>
+
+    <!-- Expense Activity -->
+    <string name="logged_expenses_title">Logged Expenses</string>
 </resources>

@@ -4,20 +4,30 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExpensesActivity extends AppCompatActivity {
     private UserProfileFragment userProfileFragment;
+    private RecyclerView recyclerView;
+    private ExpenseAdapter expenseAdapter;
+    private ArrayList<Expense> expenseList = new ArrayList<>();
+    private PreferenceHelper preferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses);
 
+        preferencesHelper = new PreferenceHelper(this);
         // Initialize the profile fragment
         userProfileFragment = (UserProfileFragment) getSupportFragmentManager().findFragmentById(R.id.user_profile_fragment);
         if (userProfileFragment == null) {
@@ -40,51 +50,62 @@ public class ExpensesActivity extends AppCompatActivity {
             userProfileFragment.updateUserProfile(level + 1, progressPercentage, username);
         }
 
+
+        // Initialize RecyclerView and Adapter
+        recyclerView = findViewById(R.id.expenses_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        expenseAdapter = new ExpenseAdapter(this, expenseList);
+        recyclerView.setAdapter(expenseAdapter);
+        expenseAdapter.notifyDataSetChanged(); // Refresh the adapter to display data
+
+        // Add some default expenses
+        expenseList.add(new Expense("Rent", 1200.00, "Rent", "Monthly"));
+        expenseList.add(new Expense("Groceries", 250.50, "Grocery", "Weekly"));
+
+        // Get the new Expense object passed from AddExpenseActivity
+        Intent intent = getIntent();
+        if (intent.hasExtra("newExpense")) {
+            Expense newExpense = (Expense) intent.getSerializableExtra("newExpense");
+            expenseList.add(newExpense);
+            expenseAdapter.notifyDataSetChanged(); // Refresh the adapter to display new data
+
+            Toast.makeText(this, "Expense added: " + newExpense.getTitle(), Toast.LENGTH_SHORT).show();
+        }
+
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
-        // Set selected item for the current activity
         navView.setSelectedItemId(R.id.menu_expenses);
 
         navView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-
             if (itemId == R.id.menu_expenses) {
-                // Current activity
                 return true;
             } else if (itemId == R.id.menu_insights) {
                 startActivity(new Intent(this, InsightsActivity.class));
-                overridePendingTransition(0, 0); // No animation
                 return true;
             } else if (itemId == R.id.menu_goals) {
                 startActivity(new Intent(this, GoalsActivity.class));
-                overridePendingTransition(0, 0); // No animation
                 return true;
             } else if (itemId == R.id.menu_milestones) {
                 startActivity(new Intent(this, MilestonesActivity.class));
-                overridePendingTransition(0, 0); // No animation
                 return true;
             }
-
             return false;
         });
 
+        // Add Floating Action Button listener
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(view -> {
-            // Navigate to the desired page
-            Intent intent = new Intent(this, AddExpenseActivity.class);
-            startActivity(intent);
-            overridePendingTransition(0, 0); // No animation
+            Intent addExpenseIntent = new Intent(this, AddExpenseActivity.class);
+            startActivity(addExpenseIntent);
         });
-
-
     }
-    @Override
-    public void onBackPressed() {
 
+    @Override
+    public void onBackPressed(){
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
 
         // Set selected item for the current activity
         navView.setSelectedItemId(R.id.menu_expenses);
@@ -95,6 +116,4 @@ public class ExpensesActivity extends AppCompatActivity {
             super.onBackPressed(); // Exit app
         }
     }
-
-
 }
