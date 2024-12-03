@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/jersey"
+        android:fontFamily="@font/retro_font"
         android:text="@string/goal_desc"
         android:textColor="@android:color/white"
         android:textSize="20sp" />

@@ -4,7 +4,6 @@
     <string name="title_notifications">Notifications</string>
 
     <string-array name="expense_types">
-        <item>Type</item>
         <item>Eating Out</item>
         <item>Transportation</item>
         <item>Grocery</item>
@@ -26,7 +25,6 @@
     </string-array>
 
     <string-array name="bill_frequencies">
-        <item>Bill Frequency</item>
         <item>One-time</item>
         <item>Daily</item>
         <item>Bi-weekly</item>

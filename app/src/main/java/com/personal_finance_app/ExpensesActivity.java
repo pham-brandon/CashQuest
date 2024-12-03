@@ -160,7 +160,7 @@ public class ExpensesActivity extends AppCompatActivity {
     }
 
     // Save expenses to SharedPreferences
-    private void saveExpenses() {
+    public void saveExpenses() {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
