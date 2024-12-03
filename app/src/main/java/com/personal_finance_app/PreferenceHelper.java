@@ -7,6 +7,7 @@ public class PreferenceHelper {
     private static final String PREF_NAME = "personal_finance_prefs";
     private static final String USER_EXP = "user_exp";
     private static final String USER_LEVEL = "user_level";
+    private static final String USER_NAME = "user_name";
 
     private final SharedPreferences sharedPreferences;
 
@@ -34,11 +35,21 @@ public class PreferenceHelper {
         editor.putInt(USER_LEVEL, level);
         editor.apply();
     }
+    public String getUsername() {
+        return sharedPreferences.getString(USER_NAME, "User");  // Default username is "User"
+    }
+
+    public void setUsername(String username) {
+        sharedPreferences.edit()
+                .putString(USER_NAME, username)
+                .apply();
+    }
 
     public User getCurrentUser() {
         int exp = getUserExp();
         int level = getUserLevel();
-        return new User(exp, level);
+        String username = getUsername();
+        return new User(exp, level, username);
     }
 
 

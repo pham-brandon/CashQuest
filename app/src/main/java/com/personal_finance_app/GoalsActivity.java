@@ -57,8 +57,10 @@ public class GoalsActivity extends AppCompatActivity {
 
         // Get EXP and Level from preferences
         SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
+        String username = prefs.getString("user_name", "User");
         int exp = prefs.getInt("user_exp", 0);
         int level = prefs.getInt("user_level", 1);
+
 
         // Initialize goals list and RecyclerView
         goalsList = new ArrayList<>();
@@ -112,6 +114,7 @@ public class GoalsActivity extends AppCompatActivity {
         loadGoalsFromPreferences();
         int exp = preferencesHelper.getUserExp();
         int level = preferencesHelper.getUserLevel();
+        String username = preferencesHelper.getUsername();
         updateEXPBar(exp);
     }
 
@@ -127,9 +130,10 @@ public class GoalsActivity extends AppCompatActivity {
         preferencesHelper.setUserExp(exp);
         preferencesHelper.setUserLevel(level);
 
+
         // Update the UserProfileFragment with new level and progress
         if (userProfileFragment != null) {
-            userProfileFragment.updateUserProfile(level + 1, progressPercentage); // +1 for 1-based level
+            userProfileFragment.updateUserProfile(level + 1, progressPercentage, preferencesHelper.getUsername()); // +1 for 1-based level
         }
 
         // Debug logs

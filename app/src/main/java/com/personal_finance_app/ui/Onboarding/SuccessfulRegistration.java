@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.personal_finance_app.ExpensesActivity;
 import com.personal_finance_app.GoalsActivity;
 import com.personal_finance_app.R;
+import android.content.SharedPreferences;
 
 public class SuccessfulRegistration extends AppCompatActivity {
 
@@ -30,6 +31,9 @@ public class SuccessfulRegistration extends AppCompatActivity {
         Intent intent = getIntent();
         userName = intent.getStringExtra("USER_NAME");
 
+        //save to shared preferences
+        saveUsernameToPreferences(userName);
+
         // Set the welcome message
         welcomeMessage.setText("Welcome, " + userName + "!");
 
@@ -42,6 +46,14 @@ public class SuccessfulRegistration extends AppCompatActivity {
         });
     }
 
+    private void saveUsernameToPreferences(String username) {
+        if (username != null) {
+            SharedPreferences preferences = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("user_name", username);
+            editor.apply(); // Save changes
+        }
+    }
     private void launchHomeActivity() {
         Intent intent = new Intent(SuccessfulRegistration.this, ExpensesActivity.class);
         startActivity(intent);
