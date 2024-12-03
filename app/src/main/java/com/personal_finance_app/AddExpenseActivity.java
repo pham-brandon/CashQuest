@@ -1,5 +1,6 @@
 package com.personal_finance_app;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -8,7 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
+import java.util.ArrayList;
+import java.util.List;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -37,14 +39,27 @@ public class AddExpenseActivity extends AppCompatActivity {
         uploadReceiptButton = findViewById(R.id.uploadReceiptButton);
         cameraReceiptButton = findViewById(R.id.cameraReceiptButton);
 
+        List<Expense> expenses = new ArrayList<>();
+
         createExpenseButton.setOnClickListener(v -> {
-            String title = expenseTitle.getText().toString();
-            String amountStr = amount.getText().toString();
+            String title = expenseTitle.getText().toString().trim();
+            String amountStr = amount.getText().toString().trim();
 
             if (title.isEmpty() || amountStr.isEmpty()) {
                 Toast.makeText(AddExpenseActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(AddExpenseActivity.this, "Expense Added", Toast.LENGTH_SHORT).show();
+                // Get the selected expense type and bill frequency
+                String selectedExpenseType = expenseType.getSelectedItem().toString();
+                String selectedBillFrequency = billFrequency.getSelectedItem().toString();
+
+                // Create a new Expense object
+                Expense newExpense = new Expense(title, Double.parseDouble(amountStr), selectedExpenseType, selectedBillFrequency);
+
+                // Send the new expense back to the ExpensesActivity
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("newExpense", newExpense);
+                setResult(RESULT_OK, resultIntent);
+                finish(); // Close AddExpenseActivity and return to ExpensesActivity
             }
         });
 

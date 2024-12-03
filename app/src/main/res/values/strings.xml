@@ -1,57 +1,81 @@
 <resources>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
     <string-array name="expense_types">
-        <item> Expense Type</item>
-        <item>Food</item>
+        <item>Type</item>
+        <item>Eating Out</item>
+        <item>Transportation</item>
+        <item>Grocery</item>
         <item>Utilities</item>
+        <item>Rent</item>
+        <item>Entertainment</item>
+        <item>Healthcare</item>
+        <item>Education</item>
+        <item>Shopping</item>
+        <item>Subscriptions</item>
+        <item>Insurance</item>
+        <item>Mortgage</item>
+        <item>Debt Payments</item>
+        <item>Charity/Donations</item>
+        <item>Investment</item>
+        <item>Pet Care</item>
+        <item>Travel/Vacation</item>
         <item>Other</item>
     </string-array>
 
     <string-array name="bill_frequencies">
-        <item> Bill Frequency</item>
+        <item>Bill Frequency</item>
+        <item>One-time</item>
+        <item>Daily</item>
+        <item>Bi-weekly</item>
         <item>Week</item>
         <item>Month</item>
-        <item>Custom</item>
+        <item>Quarterly</item>
+        <item>Annually</item>
     </string-array>
 
     <string name="app_name">Cash Quest</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_expenses">Expenses</string>
     <string name="title_insights">Insights</string>
     <string name="title_placeholder">Add</string>
     <string name="title_milestones">Milestones</string>
 
+    <!-- Register Activity -->
     <string name="registerTitle">Register</string>
     <string name="username">Username</string>
     <string name="full_name">Full name</string>
     <string name="email">Email Address</string>
     <string name="password">Password</string>
     <string name="confirmPassword">Confirm Password</string>
-    <string name="agree">I’ve read and agree to the</string>
+    <string name="agree">I\’ve read and agree to the</string>
     <string name="privacyPolicyLink">terms of privacy policy</string>
     <string name="register">REGISTER</string>
     <string name="alreadyAccount">Already have an account?</string>
     <string name="loginText">LOGIN◀</string>
 
+    <!-- Login Activity -->
     <string name="login">Log in</string>
     <string name="loginButton">LOGIN</string>
     <string name="forgotPassword">Forgot Password?</string>
-    <string name="noAccount">Don’t have an account?</string>
+    <string name="noAccount">Don\'t have an account?</string>
     <string name="registerText">REGISTER◀</string>
     <string name="invalidEmail">Please enter a valid email address</string>
     <string name="emptyPassword">The password cannot be empty</string>
 
+    <!-- Goals Activity -->
     <string name="goalsTitle">Goals</string>
-    <string name="level">Level</string>
-    <string name="exp">EXP</string>
-    <string name="create_goal">Create New</string>
+    <string name="level_text">Level</string>
+    <string name ="exp">EXP</string>
+    <string name="create_new">Create New</string>
     <string name="goals_progress_text">Goals and Progress</string>
     <string name="goal_desc">Goal description</string>
     <string name="goal_date">Date</string>
     <string name="goal_exp">Goal EXP</string>
     <string name="goal_exp_format">+%1$d EXP</string>
 
+    <!-- OnBoarding Activity -->
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="welcome">Welcome to</string>
@@ -64,4 +88,53 @@
     <string name="onboarding3">Quickly log an expense by using the smart receipt scanning feature</string>
     <string name="welcomeUser">Welcome, User!</string>
     <string name="welcomeDesc">Everything went well and Cash Quest is ready to work with you</string>
+
+    <!-- Firebase Configuration -->
+    <string name="google_app_id">1:952458125922:android:ac4586423399944859673b</string>
+    <string name="google_api_key">AIzaSyB8QD9R2VARVkxXObZV2LVGD2DANNE8IDo</string>
+    <string name="firebase_database_url">https://sparky-febd0.firebaseio.com/</string>
+    <!-- Side menu items -->
+    <string name="editProfile">Edit Profile</string>
+    <string name="help">Help</string>
+    <string name="about">About</string>
+    <string name="logout">Log out</string>
+
+    <!-- Edit Profile Activity -->
+    <string name="profilePicture">Profile Picture</string>
+    <string name="newUsername">Enter a new username</string>
+    <string name="newEmail">Enter a new email</string>
+    <string name="newPassword">Enter a new password</string>
+    <string name="saveChanges">Save Changes</string>
+    <string name="deleteProfile">Delete Profile</string>
+
+    <string name="milestonesTitle">Milestones and Achievements</string>
+
+    <!-- About Activity -->
+    <string name="about_app" >About CashQuest</string>
+    <string name="intro_about" >Embark on an adventure to conquer your finances with CashQuest, the game-like budgeting app that turns personal finance into an engaging journey.</string>
+    <string name="about_middle">Set your sights on achieving financial goals while leveling up your skills, just like in a game. Whether you’re tracking expenses, managing income, or strategizing your next financial move, CashQuest makes every step of the journey fun and rewarding.</string>
+    <string name="more_about">CashQuest is more than a budgeting app—it\'s your personal financial companion, equipped with tools to:</string>
+    <string name="about_features">
+    ‣ Set and Achieve Goals: Define your financial objectives and work towards them.\n
+    ‣ Track Income and Expenses: Easily log and categorize your spending.\n
+    ‣ Visualize Progress: View intuitive graphs that give you actionable insights into your spending habits.\n
+    ‣ Earn Rewards: Stay motivated with badges, EXP points, and quests that make financial management a game you’ll want to win.</string>
+    <string name="about_conclusion">Transform your financial future one level at a time—CashQuest makes it easy, fun, and effective. Join us today and start your quest toward financial mastery!"</string>
+
+    <!-- Help Activity -->
+
+    <!-- Add Expense Activitiy -->
+    <string name="create">Create</string>
+    <string name="amount">Amount</string>
+    <string name="expense_title">Expense Title</string>
+    <string name="add_manually">Add Manually</string>
+    <string name="capture_receipt">Capture Receipt</string>
+    <string name="upload_receipt">Upload Receipt</string>
+    <string name="scan_receipt">Scan a Receipt</string>
+    <string name="add_expense">Add an Expense</string>
+    <string name="bill_freq">Bill Frequency</string>
+    <string name="type">Type</string>
+
+    <!-- Expense Activity -->
+    <string name="logged_expenses_title">Logged Expenses</string>
 </resources>

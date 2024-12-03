@@ -1,25 +1,84 @@
 package com.personal_finance_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MilestonesActivity extends AppCompatActivity {
+    private RecyclerView milestonesRecyclerView;
+    private MilestoneAdapter milestoneAdapter;
+    private List<Milestone> milestones;
+
+
+    private PreferenceHelper preferencesHelper;
+
+    private UserProfileFragment userProfileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milestones);
 
+        preferencesHelper = new PreferenceHelper(this);
+
+        // Load user level or EXP if needed for milestones
+        int userLevel = preferencesHelper.getUserLevel();
+        Log.d("MilestonesActivity", "User Level: " + userLevel);
+
+        int userExp = preferencesHelper.getUserExp();
+        Log.d("MilestonesActivity", "User EXP: " + userExp);
+
+        // Initialize the profile fragment
+        userProfileFragment = (UserProfileFragment) getSupportFragmentManager().findFragmentById(R.id.user_profile_fragment);
+        if (userProfileFragment == null) {
+            userProfileFragment = new UserProfileFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.profile_container, userProfileFragment)
+                    .commit();
+        }
+
+        // Get EXP and Level from preferences
+        SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
+        String username = prefs.getString("user_name", "User");
+        int exp = prefs.getInt("user_exp", 0);
+        int level = prefs.getInt("user_level", 1);
+
+        // Update the EXP bar in the fragment
+        if (userProfileFragment != null) {
+            int progress = exp % 15;
+            int progressPercentage = (progress * 100) / 15;
+            userProfileFragment.updateUserProfile(level + 1, progressPercentage, username);
+        }
 
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
+        // Initialize RecyclerView
+        milestonesRecyclerView = findViewById(R.id.milestones_recycler_view);
+        milestonesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Initialize milestones list
+        milestones = new ArrayList<>();
+        milestones.add(new Milestone("Novice Saver", "Tracked finances for 5 days", true, R.drawable.ic_novice_saver, R.drawable.ic_novice_saver_locked));
+        milestones.add(new Milestone("Seasoned Financier", "Tracked finances for 15 days", false, R.drawable.ic_seasoned_financier, R.drawable.ic_seasoned_financier_locked));
+        milestones.add(new Milestone("Receipt Hunter", "Scan 5 receipts", true, R.drawable.ic_receipt_hunter, R.drawable.ic_receipt_hunter_locked));
+        milestones.add(new Milestone("Treasure Hoarder", "Scan 15 receipts", false, R.drawable.ic_treasure_hoarder, R.drawable.ic_treasure_hoarder_locked));
+        milestones.add(new Milestone("Goal Getter", "Completed 5 goals", true, R.drawable.ic_goal_getter, R.drawable.ic_goal_getter_locked));
+        milestones.add(new Milestone("Budget Hustler", "Completed 15 goals", false, R.drawable.ic_budget_hustler, R.drawable.ic_budget_hustler_locked));
+
+        // Set up adapter
+        milestoneAdapter = new MilestoneAdapter(this, milestones);
+        milestonesRecyclerView.setAdapter(milestoneAdapter);
 
         // Set selected item for the current activity
         navView.setSelectedItemId(R.id.menu_milestones);
@@ -49,7 +108,7 @@ public class MilestonesActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(view -> {
             // Navigate to the desired page
-            Intent intent = new Intent(this, AddExpense.class);
+            Intent intent = new Intent(this, AddExpenseActivity.class);
             startActivity(intent);
             overridePendingTransition(0, 0); // No animation
         });

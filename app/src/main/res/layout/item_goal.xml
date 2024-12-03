@@ -11,7 +11,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:contentDescription="@string/exp"
-        android:src="@drawable/star_goal_24dp"
+        android:src="@drawable/star"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,4 +56,5 @@
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@id/goal_desc"
         app:layout_constraintTop_toBottomOf="@id/goal_desc" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

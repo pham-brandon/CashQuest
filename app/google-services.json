@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "952458125922",
+    "firebase_url": "https://sparky-febd0-default-rtdb.firebaseio.com",
+    "project_id": "sparky-febd0",
+    "storage_bucket": "sparky-febd0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952458125922:android:ac4586423399944859673b",
+        "android_client_info": {
+          "package_name": "com.personal_finance_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8QD9R2VARVkxXObZV2LVGD2DANNE8IDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

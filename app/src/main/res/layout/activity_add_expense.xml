@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/jersey"
-        android:text="Add an expense"
+        android:text="@string/add_expense"
         android:textColor="#FFFFFF"
         android:textSize="48sp" />
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/pixelify_sans"
-            android:text="Scan a receipt"
+            android:text=""
             android:textColor="#0B0000"
             android:textSize="20sp" />
 
@@ -40,27 +40,25 @@
 
             <ImageButton
                 android:id="@+id/uploadReceiptButton"
-                android:layout_width="97dp"
-                android:layout_height="103dp"
+                android:layout_width="87dp"
+                android:layout_height="96dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/rounded_button_bg"
                 android:backgroundTint="#C0ACEB"
-                android:contentDescription="Upload receipt"
+                android:contentDescription="@string/upload_receipt"
                 android:src="@drawable/ic_upload_white" />
 
             <ImageButton
                 android:id="@+id/cameraReceiptButton"
                 android:layout_width="87dp"
                 android:layout_height="96dp"
-                android:background="@drawable/rounded_button_bg"
                 android:backgroundTint="#C0ACEB"
-                android:contentDescription="Capture receipt"
+                android:contentDescription="@string/capture_receipt"
                 android:src="@drawable/ic_camera_white" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="377dp"
+        android:layout_width="368dp"
         android:layout_height="466dp"
         android:layout_marginBottom="20dp"
         android:background="#CAFAFF"
@@ -72,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/pixelify_sans"
-            android:text="Add Manually"
+            android:text="@string/add_manually"
             android:textColor="#161515"
             android:textSize="20sp" />
 
@@ -89,7 +87,7 @@
                 android:layout_height="match_parent"
                 android:background="#C0ACEB"
                 android:fontFamily="@font/pixelify_sans"
-                android:hint="Expense Title"
+                android:hint="@string/expense_title"
                 android:padding="10dp" />
         </LinearLayout>
 
@@ -104,9 +102,10 @@
                 android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:autofillHints="0.00"
                 android:background="#C0ACEB"
                 android:fontFamily="@font/pixelify_sans"
-                android:hint="Amount"
+                android:hint="@string/amount"
                 android:inputType="numberDecimal"
                 android:padding="10dp" />
         </LinearLayout>
@@ -122,9 +121,10 @@
                 android:id="@+id/expenseType"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/rounded_button_bg"
+                android:background="@drawable/rounded_button"
                 android:backgroundTint="#C0ACEB"
-                android:entries="@array/expense_types" />
+                android:entries="@array/expense_types"
+                android:fontFamily="@font/pixelify_sans" />
 
 
         </LinearLayout>
@@ -140,9 +140,10 @@
                 android:id="@+id/billFrequency"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/rounded_button_bg"
+                android:background="@drawable/rounded_button"
                 android:backgroundTint="#C0ACEB"
-                android:entries="@array/bill_frequencies" />
+                android:entries="@array/bill_frequencies"
+                android:fontFamily="@font/pixelify_sans" />
 
 
         </LinearLayout>
@@ -151,9 +152,9 @@
             android:id="@+id/createExpenseButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button_bg"
+            android:background="@drawable/rounded_button"
             android:fontFamily="@font/jersey"
-            android:text="Create"
+            android:text="@string/create"
             android:textColor="#FAFAFA"
             android:textSize="16sp" />
     </LinearLayout>
