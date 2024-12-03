@@ -62,7 +62,7 @@ public class ExpensesActivity extends AppCompatActivity {
 
         // manually adding to test
         expenseList.add(new Expense("Rent", 1200.00, "Rent", "Monthly"));
-        //expenseList.add(new Expense("Groceries", 250.50, "Grocery", "Weekly"));
+        expenseList.add(new Expense("Groceries", 250.50, "Grocery", "Weekly"));
 
         // Get the new Expense object passed from AddExpenseActivity
         Intent intent = getIntent();
@@ -84,12 +84,15 @@ public class ExpensesActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.menu_insights) {
                 startActivity(new Intent(this, InsightsActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             } else if (itemId == R.id.menu_goals) {
                 startActivity(new Intent(this, GoalsActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             } else if (itemId == R.id.menu_milestones) {
                 startActivity(new Intent(this, MilestonesActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             }
             return false;
@@ -97,6 +100,7 @@ public class ExpensesActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(view -> {
+            overridePendingTransition(0, 0);
             Intent addExpenseIntent = new Intent(this, AddExpenseActivity.class);
             startActivityForResult(addExpenseIntent, ADD_EXPENSE_REQUEST_CODE); // Add request code
         });

@@ -35,7 +35,7 @@
         <activity android:name=".GoalsActivity" android:exported="true" />
         <activity android:name=".RegisterActivity" android:exported="true" />
         <activity android:name=".OCRTestActivity" android:exported="true" />
-        <activity android:name=".MainActivity" android:exported="true" />
+        <activity android:name=".ExpensesActivity" android:exported="true" />
         <activity android:name=".LoginActivity" android:exported="true" />
         <activity android:name=".AddExpenseActivity" android:exported="true" />
         <activity android:name=".InsightsActivity" android:exported="true" />
@@ -45,7 +45,7 @@
 
         <!-- Main Activity -->
         <activity
-            android:name=".ExpensesActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
