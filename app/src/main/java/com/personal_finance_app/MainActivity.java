@@ -31,9 +31,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         if (checkUserAuthentication()) {
-            initializeUI();
-            setupBottomNavigation();
+            startActivity(new Intent(MainActivity.this, ExpensesActivity.class));
+            //go directly to ExpenseActivity after login
+            //initializeUI();
+            //setupBottomNavigation();
         }
+
     }
 
     private boolean checkUserAuthentication() {
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton centerFab = findViewById(R.id.fab_add);
         centerFab.setVisibility(View.VISIBLE);
         centerFab.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, AddExpense.class);
+            Intent intent = new Intent(MainActivity.this, AddExpenseActivity.class);
             startActivity(intent);
         });
     }

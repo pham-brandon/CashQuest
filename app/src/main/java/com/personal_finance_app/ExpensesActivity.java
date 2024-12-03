@@ -71,7 +71,7 @@ public class ExpensesActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(view -> {
             // Navigate to the desired page
-            Intent intent = new Intent(this, AddExpense.class);
+            Intent intent = new Intent(this, AddExpenseActivity.class);
             startActivity(intent);
             overridePendingTransition(0, 0); // No animation
         });

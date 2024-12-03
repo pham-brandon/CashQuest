@@ -44,7 +44,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalsViewHol
         String expText = holder.itemView.getContext().getString(R.string.goal_exp_format, goal.getExp());
         holder.expTextView.setText(expText);
 
-        //check if goal is completed and update the UI
+        // Check if goal is completed and update the UI
         int textColor = goal.isCompleted()
                 ? context.getResources().getColor(R.color.grey)
                 : context.getResources().getColor(R.color.white);
@@ -127,7 +127,6 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalsViewHol
     }
 
     private void markGoalAsComplete(Goal goal, int position) {
-
         if (!goal.isCompleted()) {
             goal.setCompleted(true);
             notifyItemChanged(position);  // Update the RecyclerView item
@@ -140,6 +139,12 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalsViewHol
 
             // Show a toast to inform the user the goal is now complete
             Toast.makeText(context, "Goal marked as complete!", Toast.LENGTH_SHORT).show();
+
+            // Save the updated goals list to preferences
+            if (context instanceof GoalsActivity) {
+                GoalsActivity activity = (GoalsActivity) context;
+                activity.saveGoalsToPreferences();  // Persist the updated goals list
+            }
 
         } else {
             // If goal is already completed, show a Toast message
