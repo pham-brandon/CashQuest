@@ -76,6 +76,12 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         return expenses.size();
     }
 
+    //update the list of expenses
+    public void updateExpenses(List<Expense> newExpenses) {
+        this.expenses = newExpenses;
+        notifyDataSetChanged();
+    }
+
     public static class ExpenseViewHolder extends RecyclerView.ViewHolder {
 
         TextView titleTextView;
@@ -95,4 +101,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
             iconImageView = itemView.findViewById(R.id.expense_icon);
         }
     }
+
+
 }

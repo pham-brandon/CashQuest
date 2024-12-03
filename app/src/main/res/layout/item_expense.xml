@@ -31,7 +31,7 @@
             android:text="@string/expense_title"
             android:textColor="@android:color/white"
             android:textSize="24sp"
-            android:fontFamily="@font/pixelify_sans"/>
+            android:fontFamily="@font/jersey"/>
 
         <TextView
             android:id="@+id/expense_category"
@@ -40,8 +40,7 @@
             android:layout_marginTop="2dp"
             android:text="@string/type"
             android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:fontFamily="@font/pixelify_sans"/>
+            android:textSize="14sp" />
         <TextView
             android:id="@+id/billFrequency"
             android:layout_width="wrap_content"
@@ -49,8 +48,7 @@
             android:layout_marginTop="2dp"
             android:text="@string/bill_freq"
             android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:fontFamily="@font/pixelify_sans"/>
+            android:textSize="14sp" />
     </LinearLayout>
 
     <!-- Expense Amount -->
@@ -61,6 +59,6 @@
         android:text="$0.00"
         android:textColor="@android:color/white"
         android:textSize="25sp"
-        android:fontFamily="@font/pixelify_sans"
+        android:fontFamily="@font/jersey"
         android:gravity="end" />
 </LinearLayout>

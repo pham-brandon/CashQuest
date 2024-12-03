@@ -12,6 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +26,8 @@ public class ExpensesActivity extends AppCompatActivity {
     private ArrayList<Expense> expenseList = new ArrayList<>();
     private PreferenceHelper preferencesHelper;
     private static final int ADD_EXPENSE_REQUEST_CODE = 1;
+    private static final String PREFS_NAME = "personal_finance_prefs";
+    private static final String EXPENSES_KEY = "expenses";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +66,14 @@ public class ExpensesActivity extends AppCompatActivity {
         recyclerView.setAdapter(expenseAdapter);
         expenseAdapter.notifyDataSetChanged(); // Refresh the adapter to display data
 
+        //load the expenses
+        loadExpenses();
+
+        //resetExpenses(); //future? maybe add a "clear all" button??
+
         // manually adding to test
-        expenseList.add(new Expense("Rent", 1200.00, "Rent", "Monthly"));
-        expenseList.add(new Expense("Groceries", 250.50, "Grocery", "Weekly"));
+        //expenseList.add(new Expense("Rent", 1200.00, "Rent", "Monthly"));
+        //expenseList.add(new Expense("Groceries", 250.50, "Grocery", "Weekly"));
 
         // Get the new Expense object passed from AddExpenseActivity
         Intent intent = getIntent();
@@ -105,7 +116,19 @@ public class ExpensesActivity extends AppCompatActivity {
             startActivityForResult(addExpenseIntent, ADD_EXPENSE_REQUEST_CODE); // Add request code
         });
     }
+    private void resetExpenses() {
+        // Clear the list
+        expenseList.clear();
 
+        // Update the adapter
+        expenseAdapter.updateExpenses(expenseList);
+        expenseAdapter.notifyDataSetChanged();
+
+        // Save the empty list to SharedPreferences
+        saveExpenses();
+
+        Toast.makeText(this, "Expense list has been cleared", Toast.LENGTH_SHORT).show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -115,12 +138,39 @@ public class ExpensesActivity extends AppCompatActivity {
             if (newExpense != null) {
                 expenseList.add(newExpense);
                 expenseAdapter.notifyDataSetChanged(); // Refresh the adapter
+                saveExpenses();
                 Toast.makeText(this, "Expense added: " + newExpense.getTitle(), Toast.LENGTH_SHORT).show();
             } else {
                 Log.e("ExpensesActivity", "New Expense is null");
             }
         }
     }
+
+    // Load expenses from SharedPreferences
+    private void loadExpenses() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String expensesJson = prefs.getString(EXPENSES_KEY, null);
+
+        if (expensesJson != null) {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<Expense>>(){}.getType();
+            expenseList = gson.fromJson(expensesJson, listType);
+            expenseAdapter.updateExpenses(expenseList);
+        }
+    }
+
+    // Save expenses to SharedPreferences
+    private void saveExpenses() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        Gson gson = new Gson();
+        String expensesJson = gson.toJson(expenseList);
+
+        editor.putString(EXPENSES_KEY, expensesJson);
+        editor.apply();
+    }
+
 
     @Override
     public void onBackPressed(){
