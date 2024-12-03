@@ -96,6 +96,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalsViewHol
             if (!newDescription.isEmpty()) {
                 goal.setDescription(newDescription);
                 notifyDataSetChanged();
+                Toast.makeText(context, "Goal description updated.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -119,6 +120,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalsViewHol
                         String newDate = "Due: " + selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay;
                         goal.setDate(newDate);
                         notifyDataSetChanged();
+                        Toast.makeText(context, "Goal date updated.", Toast.LENGTH_SHORT).show();
                     }, year, month, day);
 
             datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
@@ -158,7 +160,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalsViewHol
 
             goalsList.remove(position);
             notifyItemRemoved(position);
-
+            Toast.makeText(context, "Goal deleted.", Toast.LENGTH_SHORT).show();
             if (position < goalsList.size()) {
                 notifyItemRangeChanged(position, goalsList.size() - position);
             }

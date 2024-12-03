@@ -9,14 +9,15 @@
     android:layout_marginBottom="16dp">
 
     <!-- Expense Icon -->
+
+    <!-- Expense Details -->
     <ImageView
         android:id="@+id/expense_icon"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/other_expenses"/>
+        android:src="@drawable/other_expenses" />
 
-    <!-- Expense Details -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -30,8 +31,8 @@
             android:layout_marginTop="5dp"
             android:text="@string/expense_title"
             android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:fontFamily="@font/pixelify_sans"/>
+            android:textSize="20sp"
+            android:fontFamily="@font/retro_font"/>
 
         <TextView
             android:id="@+id/expense_category"
@@ -40,8 +41,7 @@
             android:layout_marginTop="2dp"
             android:text="@string/type"
             android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:fontFamily="@font/pixelify_sans"/>
+            android:textSize="14sp" />
         <TextView
             android:id="@+id/billFrequency"
             android:layout_width="wrap_content"
@@ -49,8 +49,7 @@
             android:layout_marginTop="2dp"
             android:text="@string/bill_freq"
             android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:fontFamily="@font/pixelify_sans"/>
+            android:textSize="14sp" />
     </LinearLayout>
 
     <!-- Expense Amount -->
@@ -61,6 +60,6 @@
         android:text="$0.00"
         android:textColor="@android:color/white"
         android:textSize="25sp"
-        android:fontFamily="@font/pixelify_sans"
+        android:fontFamily="@font/retro_font"
         android:gravity="end" />
 </LinearLayout>
