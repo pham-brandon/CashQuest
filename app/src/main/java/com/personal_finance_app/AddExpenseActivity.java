@@ -58,6 +58,20 @@ public class AddExpenseActivity extends AppCompatActivity {
                 String selectedExpenseType = expenseType.getSelectedItem().toString();
                 String selectedBillFrequency = billFrequency.getSelectedItem().toString();
 
+                double expenseAmount;
+                try {
+                    expenseAmount = Double.parseDouble(amountStr);
+
+                    // amount > 0
+                    if (expenseAmount <= 0) {
+                        Toast.makeText(AddExpenseActivity.this, "Amount must be greater than zero", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(AddExpenseActivity.this, "Please enter a valid numeric value for the amount", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Expense newExpense = new Expense(title, Double.parseDouble(amountStr), selectedExpenseType, selectedBillFrequency);
 
                 expensesList.add(newExpense);
@@ -65,6 +79,10 @@ public class AddExpenseActivity extends AppCompatActivity {
 
                 Toast.makeText(AddExpenseActivity.this, "Expense saved successfully", Toast.LENGTH_SHORT).show();
                 finish();
+                expenseTitle.setText("");
+                amount.setText("");
+                expenseType.setSelection(0);
+                billFrequency.setSelection(0);
             }
         });
 
