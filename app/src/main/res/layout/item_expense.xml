@@ -31,7 +31,7 @@
             android:layout_marginTop="5dp"
             android:text="@string/expense_title"
             android:textColor="@android:color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:fontFamily="@font/retro_font"/>
 
         <TextView
@@ -41,7 +41,6 @@
             android:layout_marginTop="2dp"
             android:text="@string/type"
             android:textColor="@android:color/white"
-            android:fontFamily="@font/retro_font"
             android:textSize="14sp" />
         <TextView
             android:id="@+id/billFrequency"
@@ -50,7 +49,6 @@
             android:layout_marginTop="2dp"
             android:text="@string/bill_freq"
             android:textColor="@android:color/white"
-            android:fontFamily="@font/retro_font"
             android:textSize="14sp" />
     </LinearLayout>
 

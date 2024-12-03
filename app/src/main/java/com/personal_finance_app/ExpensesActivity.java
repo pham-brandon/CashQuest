@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,6 +31,7 @@ public class ExpensesActivity extends AppCompatActivity {
     private static final int ADD_EXPENSE_REQUEST_CODE = 1;
     private static final String PREFS_NAME = "personal_finance_prefs";
     private static final String EXPENSES_KEY = "expenses";
+    private Spinner frequencySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,10 @@ public class ExpensesActivity extends AppCompatActivity {
         recyclerView.setAdapter(expenseAdapter);
         expenseAdapter.notifyDataSetChanged(); // Refresh the adapter to display data
 
+
+        // initialize spinner
+        frequencySpinner = findViewById(R.id.expenseFilterSpinner);
+
         //load the expenses
         loadExpenses();
 
@@ -84,6 +92,24 @@ public class ExpensesActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Expense added: " + newExpense.getTitle(), Toast.LENGTH_SHORT).show();
         }
+
+
+        // Set default selection
+        frequencySpinner.setSelection(0);
+
+        // Listener for Spinner selection
+        frequencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedFrequency = parent.getItemAtPosition(position).toString();
+                filterExpensesByFrequency(selectedFrequency);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                filterExpensesByFrequency("All");
+            }
+        });
 
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -128,6 +154,23 @@ public class ExpensesActivity extends AppCompatActivity {
         saveExpenses();
 
         Toast.makeText(this, "Expense list has been cleared", Toast.LENGTH_SHORT).show();
+    }
+
+    private void filterExpensesByFrequency(String frequency) {
+        if (frequency.equals("All")) {
+            // Show all expenses
+            expenseAdapter.updateExpenses(expenseList);
+        } else {
+            // Filter based on the frequency
+            List<Expense> filteredList = new ArrayList<>();
+            for (Expense expense : expenseList) {
+                if (expense.getFrequency().equalsIgnoreCase(frequency)) {
+                    filteredList.add(expense);
+                }
+            }
+            expenseAdapter.updateExpenses(filteredList);
+        }
+        expenseAdapter.notifyDataSetChanged(); // Refresh the RecyclerView
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

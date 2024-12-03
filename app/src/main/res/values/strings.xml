@@ -28,8 +28,19 @@
         <item>One-time</item>
         <item>Daily</item>
         <item>Bi-weekly</item>
-        <item>Week</item>
-        <item>Month</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Quarterly</item>
+        <item>Annually</item>
+    </string-array>
+
+    <string-array name="bill_frequencies_with_all">
+        <item>All</item>
+        <item>One-time</item>
+        <item>Daily</item>
+        <item>Bi-weekly</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
         <item>Quarterly</item>
         <item>Annually</item>
     </string-array>
