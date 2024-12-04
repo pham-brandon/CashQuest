@@ -66,4 +66,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation ("com.google.mlkit:text-recognition:16.0.1")
 
+    // Chart
+    implementation (libs.mpandroidchart)
+
 }
