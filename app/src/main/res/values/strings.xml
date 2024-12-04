@@ -143,6 +143,7 @@
     <string name="add_expense">Add an Expense</string>
     <string name="bill_freq">Bill Frequency</string>
     <string name="type">Type</string>
+    <string name="upload_or_capture">Upload or Capture</string>
 
     <!-- Expense Activity -->
     <string name="logged_expenses_title">Logged Expenses</string>

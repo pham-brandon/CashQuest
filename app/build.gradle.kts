@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services") // Firebase services plugin
 }
 
 android {
@@ -17,7 +18,7 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -25,18 +26,22 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     buildFeatures {
         viewBinding = true
     }
-    buildToolsVersion = "33.0.1"
+
+    buildToolsVersion = "34.0.0"
     ndkVersion = "26.1.10909125"
 }
 
 dependencies {
+    // AndroidX and Material Design dependencies
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -45,25 +50,31 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.activity)
-    implementation(libs.play.services.mlkit.text.recognition)
 
-    // Firebase dependencies
-    implementation(platform("com.google.firebase:firebase-bom:32.1.0"))
+    // Play Services
+    implementation(libs.play.services.mlkit.text.recognition)
+    implementation("com.google.android.gms:play-services-base:18.1.0") // Base Play Services
+
+    // Firebase dependencies (using BOM for consistent versions)
+    implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
+    implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-database:20.1.0")
     implementation("com.google.firebase:firebase-auth:21.3.0")
     implementation("com.google.firebase:firebase-analytics:21.2.2")
-    implementation("com.google.firebase:firebase-firestore:24.9.0")
 
-
-
-    // Test dependencies
+    // Testing dependencies
     testImplementation(libs.junit)
-    testImplementation("mysql:mysql-connector-java:8.0.29")
     testImplementation("org.mockito:mockito-core:4.0.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
-    implementation("com.google.code.gson:gson:2.8.9")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation ("com.google.mlkit:text-recognition:16.0.1")
 
+    // Gson for JSON handling
+    implementation("com.google.code.gson:gson:2.8.9")
+
+    // ML Kit
+    implementation("com.google.mlkit:text-recognition:16.0.1")
 }
+
+// Apply the Google Services plugin for Firebase
+apply(plugin = "com.google.gms.google-services")
