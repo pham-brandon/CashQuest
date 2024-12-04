@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -45,6 +47,45 @@ public class EditProfileActivity extends AppCompatActivity {
                 saveProfileChanges();
             }
         });
+
+        // Initialize BottomNavigationView
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+
+
+        // Set selected item for the current activity
+        navView.setSelectedItemId(R.id.menu_expenses);
+
+        navView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.menu_expenses) {
+                startActivity(new Intent(this, ExpensesActivity.class));
+                return true;
+            } else if (itemId == R.id.menu_insights) {
+                startActivity(new Intent(this, InsightsActivity.class));
+                overridePendingTransition(0, 0); // No animation
+                return true;
+            } else if (itemId == R.id.menu_goals) {
+                startActivity(new Intent(this, GoalsActivity.class));
+                overridePendingTransition(0, 0); // No animation
+                return true;
+            } else if (itemId == R.id.menu_milestones) {
+                startActivity(new Intent(this, MilestonesActivity.class));
+                overridePendingTransition(0, 0); // No animation
+                return true;
+            }
+
+            return false;
+        });
+
+        FloatingActionButton fab = findViewById(R.id.fab_add);
+        fab.setOnClickListener(view -> {
+            // Navigate to the desired page
+            Intent intent = new Intent(this, AddExpenseActivity.class);
+            startActivity(intent);
+            overridePendingTransition(0, 0); // No animation
+        });
+
     }
 
     private void saveProfileChanges() {
@@ -103,4 +144,22 @@ public class EditProfileActivity extends AppCompatActivity {
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onBackPressed() {
+
+        // Initialize BottomNavigationView
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+
+
+        // Set selected item for the current activity
+        navView.setSelectedItemId(R.id.menu_expenses);
+
+        if (R.id.menu_expenses != navView.getSelectedItemId()) {
+            navView.setSelectedItemId(R.id.menu_expenses); // Go to the default tab
+        } else {
+            super.onBackPressed(); // Exit app
+        }
+    }
+
 }
