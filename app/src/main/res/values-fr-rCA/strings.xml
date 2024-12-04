@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_home">Accueil</string>
+    <string name="title_dashboard">Tableau de bord</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string-array name="expense_types">
+        <item>Repas à l\'extérieur</item>
+        <item>Transport</item>
+        <item>Épicerie</item>
+        <item>Services publics</item>
+        <item>Loyer</item>
+        <item>Divertissement</item>
+        <item>Santé</item>
+        <item>Éducation</item>
+        <item>Achats</item>
+        <item>Abonnements</item>
+        <item>Assurances</item>
+        <item>Hypothèque</item>
+        <item>Paiements de dettes</item>
+        <item>Charité/Donations</item>
+        <item>Investissements</item>
+        <item>Soin des animaux</item>
+        <item>Voyages/Vacances</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="bill_frequencies">
+        <item>Une seule fois</item>
+        <item>Quotidien</item>
+        <item>Bi-hebdomadaire</item>
+        <item>Hebdomadaire</item>
+        <item>Mensuel</item>
+        <item>Trimestriel</item>
+        <item>Annuel</item>
+    </string-array>
+
+    <string name="app_name">Cash Quest</string>
+    <string name="title_expenses">Dépenses</string>
+    <string name="title_insights">Aperçus</string>
+    <string name="title_placeholder">Ajouter</string>
+    <string name="title_milestones">Jalons</string>
+
+    <!-- Register Activity -->
+    <string name="registerTitle">Inscription</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="full_name">Nom complet</string>
+    <string name="email">Adresse e-mail</string>
+    <string name="password">Mot de passe</string>
+    <string name="confirmPassword">Confirmer le mot de passe</string>
+    <string name="agree">J\'ai lu et j\'accepte les</string>
+    <string name="privacyPolicyLink">termes de la politique de confidentialité</string>
+    <string name="register">INSCRIRE</string>
+    <string name="alreadyAccount">Vous avez déjà un compte?</string>
+    <string name="loginText">SE CONNECTER◀</string>
+
+    <!-- Login Activity -->
+    <string name="login">Se connecter</string>
+    <string name="loginButton">CONNEXION</string>
+    <string name="forgotPassword">Mot de passe oublié?</string>
+    <string name="noAccount">Vous n\'avez pas de compte?</string>
+    <string name="registerText">S\'INSCRIRE◀</string>
+    <string name="invalidEmail">Veuillez entrer une adresse e-mail valide</string>
+    <string name="emptyPassword">Le mot de passe ne peut pas être vide</string>
+
+    <!-- Goals Activity -->
+    <string name="goalsTitle">Objectifs</string>
+    <string name="level_text">Niveau</string>
+    <string name="exp">EXP</string>
+    <string name="create_new">Créer un nouveau</string>
+    <string name="goals_progress_text">Objectifs et Progrès</string>
+    <string name="goal_desc">Description de l\'objectif</string>
+    <string name="goal_date">Date</string>
+    <string name="goal_exp">EXP de l\'objectif</string>
+    <string name="goal_exp_format">+%1$d EXP</string>
+
+    <!-- OnBoarding Activity -->
+    <string name="skip">Passer</string>
+    <string name="next">Suivant</string>
+    <string name="welcome">Bienvenue à</string>
+    <string name="tagline">Gérez vos dépenses, définissez des objectifs et suivez les progrès!</string>
+    <string name="title1">Prenez le contrôle de vos finances</string>
+    <string name="onboarding1">Restez à jour en suivant facilement vos abonnements et factures</string>
+    <string name="title2">Définissez et atteignez des objectifs financiers</string>
+    <string name="onboarding2">Définissez vos objectifs financiers et suivez vos progrès</string>
+    <string name="title3">Enregistrez vos dépenses facilement</string>
+    <string name="onboarding3">Enregistrez rapidement une dépense en utilisant la fonction de numérisation de reçus</string>
+    <string name="welcomeUser">Bienvenue, Utilisateur!</string>
+    <string name="welcomeDesc">Tout s\'est bien passé et Cash Quest est prêt à travailler avec vous</string>
+
+    <!-- Firebase Configuration -->
+    <string name="google_app_id">1:952458125922:android:ac4586423399944859673b</string>
+    <string name="google_api_key">AIzaSyB8QD9R2VARVkxXObZV2LVGD2DANNE8IDo</string>
+    <string name="firebase_database_url">https://sparky-febd0.firebaseio.com/</string>
+    <!-- Side menu items -->
+    <string name="editProfile">Modifier le profil</string>
+    <string name="help">Aide</string>
+    <string name="about">À propos</string>
+    <string name="logout">Se déconnecter</string>
+
+    <!-- Edit Profile Activity -->
+    <string name="profilePicture">Photo de profil</string>
+    <string name="newUsername">Entrez un nouveau nom d\'utilisateur</string>
+    <string name="newEmail">Entrez un nouvel e-mail</string>
+    <string name="newPassword">Entrez un nouveau mot de passe</string>
+    <string name="saveChanges">Enregistrer les modifications</string>
+    <string name="deleteProfile">Supprimer le profil</string>
+
+    <string name="milestonesTitle">Jalons et Réalisations</string>
+
+    <!-- About Activity -->
+    <string name="about_app" >À propos de CashQuest</string>
+    <string name="intro_about" >Embarquez dans une aventure pour conquérir vos finances avec CashQuest, l\'application de budget ludique qui transforme la gestion financière personnelle en un parcours passionnant.</string>
+    <string name="about_middle">Fixez-vous des objectifs financiers et suivez vos progrès, comme dans un jeu. Que vous suiviez vos dépenses, gériez vos revenus ou planifiez votre prochaine étape financière, CashQuest rend chaque étape de votre parcours amusante et enrichissante.</string>
+    <string name="more_about">CashQuest est bien plus qu\'une application de budget — c\'est votre compagnon financier personnel, équipé des outils pour:</string>
+    <string name="about_features">
+    ‣ Définir et atteindre des objectifs: Définissez vos objectifs financiers et travaillez pour les atteindre.\n
+    ‣ Suivre les revenus et les dépenses: Enregistrez facilement vos dépenses et catégories.\n
+    ‣ Visualiser les progrès: Affichez des graphiques intuitifs pour avoir des aperçus exploitables de vos habitudes de consommation.\n
+    ‣ Gagner des récompenses: Restez motivé avec des badges, des points EXP et des missions qui transforment la gestion financière en un jeu.\n</string>
+    <string name="about_conclusion">Transformez votre avenir financier un niveau à la fois — CashQuest le rend facile, amusant et efficace. Rejoignez-nous aujourd\'hui et commencez votre quête vers la maîtrise financière!</string>
+
+    <!-- Help Activity -->
+
+    <!-- Add Expense Activitiy -->
+    <string name="create">Créer</string>
+    <string name="amount">Montant</string>
+    <string name="expense_title">Titre de la dépense</string>
+    <string name="add_manually">Ajouter manuellement</string>
+    <string name="capture_receipt">Capturer un reçu</string>
+    <string name="upload_receipt">Télécharger un reçu</string>
+    <string name="scan_receipt">Scanner un reçu</string>
+    <string name="add_expense">Ajouter une dépense</string>
+    <string name="bill_freq">Fréquence de facturation</string>
+    <string name="type">Type</string>
+
+    <!-- Expense Activity -->
+    <string name="logged_expenses_title">Dépenses enregistrées</string>
+
+    <string name="upload_or_capture">Télécharger ou capturer</string>
+    <string name="spending_insights_title">Informations sur les dépenses</string>
+</resources>
