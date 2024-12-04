@@ -18,7 +18,7 @@ public class MilestonesActivity extends AppCompatActivity {
     private RecyclerView milestonesRecyclerView;
     private MilestoneAdapter milestoneAdapter;
     private List<Milestone> milestones;
-
+    private List<Expense> expenses;
 
     private PreferenceHelper preferencesHelper;
 
@@ -134,7 +134,7 @@ public class MilestonesActivity extends AppCompatActivity {
     private void checkAndUnlockMilestones(int totalExp) {
 
         int newLevel = 0;
-        newLevel= preferencesHelper.getUserLevel();
+        newLevel= preferencesHelper.getUserLevel() + 1;
         Log.d("MilestonesActivity", "User Level: " + newLevel);
 
 
@@ -213,6 +213,7 @@ public class MilestonesActivity extends AppCompatActivity {
                 }
             }
         }
+
     }
 
 }

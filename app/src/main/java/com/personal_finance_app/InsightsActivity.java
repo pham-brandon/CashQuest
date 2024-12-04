@@ -22,6 +22,12 @@ public class InsightsActivity extends AppCompatActivity {
 
         preferencesHelper = new PreferenceHelper(this);
 
+        // Load user level or EXP if needed for milestones
+        int userLevel = preferencesHelper.getUserLevel();
+        int userExp = preferencesHelper.getUserExp();
+
+        Log.d("ExpensesActivity", "User EXP: " + userExp);
+        Log.d("ExpensesActivity", "User level: " + userLevel);
         // Initialize the profile fragment
         userProfileFragment = (UserProfileFragment) getSupportFragmentManager().findFragmentById(R.id.user_profile_fragment);
         if (userProfileFragment == null) {
@@ -36,6 +42,14 @@ public class InsightsActivity extends AppCompatActivity {
         String username = prefs.getString("user_name", "User");
         int exp = prefs.getInt("user_exp", 0);
         int level = prefs.getInt("user_level", 1);
+
+        // Update the EXP bar in the fragment
+        if (userProfileFragment != null) {
+            int progress = exp % 15;
+            int progressPercentage = (progress * 100) / 15;
+            userProfileFragment.updateUserProfile(level + 1, progressPercentage, username);
+        }
+
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
