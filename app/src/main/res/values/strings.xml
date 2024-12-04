@@ -146,4 +146,12 @@
 
     <!-- Expense Activity -->
     <string name="logged_expenses_title">Logged Expenses</string>
+
+    <!-- Insights Activity -->
+    <string name="spending_insights_title">Spending Insights</string>
+    <string-array name="weeklyMonthlyInsights">
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
+
 </resources>
