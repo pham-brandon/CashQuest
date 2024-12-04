@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_home">الرئيسية</string>
+    <string name="title_dashboard">لوحة التحكم</string>
+    <string name="title_notifications">الإشعارات</string>
+
+    <string-array name="expense_types">
+        <item>تناول الطعام خارج المنزل</item>
+        <item>النقل</item>
+        <item>البقالة</item>
+        <item>المرافق</item>
+        <item>الإيجار</item>
+        <item>الترفيه</item>
+        <item>الرعاية الصحية</item>
+        <item>التعليم</item>
+        <item>التسوق</item>
+        <item>الاشتراكات</item>
+        <item>التأمين</item>
+        <item>الرهن العقاري</item>
+        <item>سداد الديون</item>
+        <item>الجمعيات/التبرعات</item>
+        <item>الاستثمار</item>
+        <item>رعاية الحيوانات الأليفة</item>
+        <item>السفر/العطلات</item>
+        <item>أخرى</item>
+    </string-array>
+
+    <string-array name="bill_frequencies">
+        <item>مرة واحدة</item>
+        <item>يومي</item>
+        <item>كل أسبوعين</item>
+        <item>أسبوعي</item>
+        <item>شهري</item>
+        <item>ربع سنوي</item>
+        <item>سنوي</item>
+    </string-array>
+
+    <string name="app_name">كاش كويست</string>
+    <string name="title_expenses">النفقات</string>
+    <string name="title_insights">الرؤى</string>
+    <string name="title_placeholder">إضافة</string>
+    <string name="title_milestones">الأهداف</string>
+
+    <!-- Register Activity -->
+    <string name="registerTitle">تسجيل</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="full_name">الاسم الكامل</string>
+    <string name="email">عنوان البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="confirmPassword">تأكيد كلمة المرور</string>
+    <string name="agree">لقد قرأت وأوافق على</string>
+    <string name="privacyPolicyLink">شروط سياسة الخصوصية</string>
+    <string name="register">تسجيل</string>
+    <string name="alreadyAccount">هل لديك حساب بالفعل؟</string>
+    <string name="loginText">تسجيل الدخول ◀</string>
+
+    <!-- Login Activity -->
+    <string name="login">تسجيل الدخول</string>
+    <string name="loginButton">تسجيل الدخول</string>
+    <string name="forgotPassword">نسيت كلمة المرور؟</string>
+    <string name="noAccount">لا تمتلك حساباً؟</string>
+    <string name="registerText">تسجيل ◀</string>
+    <string name="invalidEmail">يرجى إدخال عنوان بريد إلكتروني صالح</string>
+    <string name="emptyPassword">لا يمكن أن تكون كلمة المرور فارغة</string>
+
+    <!-- Goals Activity -->
+    <string name="goalsTitle">الأهداف</string>
+    <string name="level_text">المستوى</string>
+    <string name="exp">النقاط</string>
+    <string name="create_new">إنشاء جديد</string>
+    <string name="goals_progress_text">الأهداف والتقدم</string>
+    <string name="goal_desc">وصف الهدف</string>
+    <string name="goal_date">التاريخ</string>
+    <string name="goal_exp">نقاط الهدف</string>
+    <string name="goal_exp_format">+%1$d نقاط</string>
+
+    <!-- OnBoarding Activity -->
+    <string name="skip">تخطي</string>
+    <string name="next">التالي</string>
+    <string name="welcome">مرحباً بك في</string>
+    <string name="tagline">إدارة النفقات، تحديد الأهداف، وتتبع التقدم!</string>
+    <string name="title1">سيطر على أمورك المالية</string>
+    <string name="onboarding1">ابقَ على اطلاع عبر تتبع الاشتراكات والفواتير بسهولة</string>
+    <string name="title2">حدد وحقق الأهداف المالية</string>
+    <string name="onboarding2">حدد أهدافك المالية وتتبع تقدمك</string>
+    <string name="title3">سجل نفقاتك بسهولة</string>
+    <string name="onboarding3">سجل النفقات بسرعة باستخدام ميزة المسح الذكي للإيصالات</string>
+    <string name="welcomeUser">مرحباً بك، المستخدم!</string>
+    <string name="welcomeDesc">كل شيء جاهز وكاش كويست جاهز للعمل معك</string>
+    <!-- Side menu items -->
+    <string name="editProfile">تعديل الملف الشخصي</string>
+    <string name="help">المساعدة</string>
+    <string name="about">حول</string>
+    <string name="logout">تسجيل الخروج</string>
+
+    <!-- Edit Profile Activity -->
+    <string name="profilePicture">صورة الملف الشخصي</string>
+    <string name="newUsername">أدخل اسم مستخدم جديد</string>
+    <string name="newEmail">أدخل بريد إلكتروني جديد</string>
+    <string name="newPassword">أدخل كلمة مرور جديدة</string>
+    <string name="saveChanges">حفظ التغييرات</string>
+    <string name="deleteProfile">حذف الملف الشخصي</string>
+
+    <string name="milestonesTitle">الإنجازات والمعالم</string>
+
+    <!-- About Activity -->
+    <string name="about_app">حول CashQuest</string>
+    <string name="intro_about">انطلق في مغامرة لتحقيق أهدافك المالية مع CashQuest، تطبيق إعداد الميزانيات الذي يحول إدارة الأموال إلى رحلة ممتعة.</string>
+    <string name="about_middle">حدد أهدافك المالية وحققها أثناء تطوير مهاراتك، تمامًا كما لو كنت تلعب لعبة. سواء كنت تتبع النفقات، أو تدير الدخل، أو تخطط لخطوتك المالية التالية، يجعل CashQuest كل خطوة ممتعة ومجزية.</string>
+    <string name="more_about">CashQuest ليس مجرد تطبيق للميزانية، بل هو رفيقك المالي الشخصي، المزود بأدوات للقيام بما يلي:</string>
+    <string name="about_features">
+‣ تحديد وتحقيق الأهداف: قم بتعريف أهدافك المالية واعمل لتحقيقها.\n
+‣ تتبع الدخل والنفقات: سجل وصنف نفقاتك بسهولة.\n
+‣ تصور التقدم: اعرض رسومًا بيانية تقدم رؤى عملية حول عادات الإنفاق لديك.\n
+‣ احصل على المكافآت: ابقَ متحمسًا من خلال الشارات، ونقاط الخبرة، والمهام التي تجعل إدارة الأموال لعبة ممتعة لتحقيق الفوز.</string>
+    <string name="about_conclusion">حوّل مستقبلك المالي خطوة بخطوة—CashQuest يجعل الأمر سهلاً وممتعًا وفعالًا. انضم إلينا اليوم وابدأ رحلتك نحو التفوق المالي!"</string>
+
+    <!-- Help Activity -->
+
+    <!-- Add Expense Activity -->
+    <string name="create">إنشاء</string>
+    <string name="amount">المبلغ</string>
+    <string name="expense_title">عنوان النفقات</string>
+    <string name="add_manually">إضافة يدويًا</string>
+    <string name="capture_receipt">التقاط الإيصال</string>
+    <string name="upload_receipt">رفع الإيصال</string>
+    <string name="scan_receipt">مسح الإيصال</string>
+    <string name="add_expense">إضافة نفقة</string>
+    <string name="bill_freq">تكرار الفاتورة</string>
+    <string name="type">النوع</string>
+
+
+    <!-- Expense Activity -->
+    <string name="logged_expenses_title">النفقات المسجلة</string>
+
+    <string name="spending_insights_title">جدول الإنفاق</string>
+    <string name="upload_or_capture">تحميل أو التقاط</string>
+</resources>
