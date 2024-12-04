@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(this::handleNavigation);
     }
 
-    private boolean handleNavigation(@NonNull MenuItem item) {
+    public boolean handleNavigation(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.menu_expenses) {
@@ -94,5 +94,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
         return true;
+
     }
 }

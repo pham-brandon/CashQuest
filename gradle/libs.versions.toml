@@ -14,11 +14,12 @@ navigationFragment = "2.8.1"
 navigationUi = "2.8.1"
 activity = "1.9.3"
 playServicesMlkitTextRecognition = "19.0.1"
+espressoContrib = "3.6.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version = "1.2.1" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version = "3.6.1" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
@@ -30,6 +31,7 @@ navigation-fragment = { group = "androidx.navigation", name = "navigation-fragme
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 play-services-mlkit-text-recognition = { group = "com.google.android.gms", name = "play-services-mlkit-text-recognition", version.ref = "playServicesMlkitTextRecognition" }
+espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoContrib" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

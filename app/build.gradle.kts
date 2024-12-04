@@ -79,6 +79,7 @@ dependencies {
 
     // ML Kit
     implementation("com.google.mlkit:text-recognition:16.0.1")
+    androidTestImplementation(libs.espresso.contrib)
 }
 
 // Apply the Google Services plugin for Firebase
