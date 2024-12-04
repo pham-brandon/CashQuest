@@ -12,22 +12,21 @@ public class PreferenceHelper {
     private final SharedPreferences sharedPreferences;
 
     public PreferenceHelper(Context context) {
-        sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences("personal_finance_prefs", Context.MODE_PRIVATE);
     }
 
     public int getUserExp() {
-        return sharedPreferences.getInt(USER_EXP, 0);  // Default EXP is 0
+        return sharedPreferences.getInt("user_exp", 0); // Default value is 0
     }
 
     public void setUserExp(int exp) {
-        sharedPreferences.edit()
-                .putInt("user_exp", exp)
-                .putInt("user_level", exp / 15) // Ensure this matches your calculation logic
-                .apply();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("user_exp", exp);
+        editor.apply();
     }
 
     public int getUserLevel() {
-        return sharedPreferences.getInt(USER_LEVEL, 1);  // Default level is 1
+        return sharedPreferences.getInt("user_level", 1); // Default value is 1
     }
 
     public void setUserLevel(int level) {
@@ -51,6 +50,8 @@ public class PreferenceHelper {
         String username = getUsername();
         return new User(exp, level, username);
     }
+
+
 
 
 }

@@ -20,4 +20,8 @@ public class Milestone {
     public boolean isUnlocked() { return isUnlocked; }
     public int getUnlockedIconResId() { return unlockedIconResId; }
     public int getLockedIconResId() { return lockedIconResId; }
+
+    public void setUnlocked(boolean unlocked) {
+        this.isUnlocked = unlocked;
+    }
 }

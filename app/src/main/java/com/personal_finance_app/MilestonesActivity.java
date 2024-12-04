@@ -33,9 +33,8 @@ public class MilestonesActivity extends AppCompatActivity {
 
         // Load user level or EXP if needed for milestones
         int userLevel = preferencesHelper.getUserLevel();
-        Log.d("MilestonesActivity", "User Level: " + userLevel);
-
         int userExp = preferencesHelper.getUserExp();
+
         Log.d("MilestonesActivity", "User EXP: " + userExp);
 
         // Initialize the profile fragment
@@ -60,25 +59,25 @@ public class MilestonesActivity extends AppCompatActivity {
             userProfileFragment.updateUserProfile(level + 1, progressPercentage, username);
         }
 
+        // Initialize RecyclerView and Adapter
+        milestones = new ArrayList<>();  // Initialize the milestones list
+        initializeMilestones();  // Populate the milestones list
+        milestoneAdapter = new MilestoneAdapter(this, milestones);  // Create the adapter
+        RecyclerView recyclerView = findViewById(R.id.milestones_recycler_view);
+
+        // Set LayoutManager before setting the adapter
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));  // Add this line
+        recyclerView.setAdapter(milestoneAdapter);  // Set the adapter for the RecyclerView
+
+        // Notify the adapter that the data has changed
+        milestoneAdapter.notifyDataSetChanged();
+
+        // Check if any milestone should be unlocked based on current EXP
+        checkAndUnlockMilestones(exp);
+
+
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
-        // Initialize RecyclerView
-        milestonesRecyclerView = findViewById(R.id.milestones_recycler_view);
-        milestonesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize milestones list
-        milestones = new ArrayList<>();
-        milestones.add(new Milestone("Novice Saver", "Tracked finances for 5 days", true, R.drawable.ic_novice_saver, R.drawable.ic_novice_saver_locked));
-        milestones.add(new Milestone("Seasoned Financier", "Tracked finances for 15 days", false, R.drawable.ic_seasoned_financier, R.drawable.ic_seasoned_financier_locked));
-        milestones.add(new Milestone("Receipt Hunter", "Scan 5 receipts", true, R.drawable.ic_receipt_hunter, R.drawable.ic_receipt_hunter_locked));
-        milestones.add(new Milestone("Treasure Hoarder", "Scan 15 receipts", false, R.drawable.ic_treasure_hoarder, R.drawable.ic_treasure_hoarder_locked));
-        milestones.add(new Milestone("Goal Getter", "Completed 5 goals", true, R.drawable.ic_goal_getter, R.drawable.ic_goal_getter_locked));
-        milestones.add(new Milestone("Budget Hustler", "Completed 15 goals", false, R.drawable.ic_budget_hustler, R.drawable.ic_budget_hustler_locked));
-
-        // Set up adapter
-        milestoneAdapter = new MilestoneAdapter(this, milestones);
-        milestonesRecyclerView.setAdapter(milestoneAdapter);
 
         // Set selected item for the current activity
         navView.setSelectedItemId(R.id.menu_milestones);
@@ -113,4 +112,107 @@ public class MilestonesActivity extends AppCompatActivity {
             overridePendingTransition(0, 0); // No animation
         });
     }
+
+    private void initializeMilestones() {
+        milestones.add(new Milestone("Rookie", "Started your journey!", true, R.drawable.ic_goal_getter, R.drawable.ic_goal_getter_locked));
+        milestones.add(new Milestone("Goal Getter", "Completed 5 goals", false, R.drawable.ic_novice_saver, R.drawable.ic_novice_saver_locked));
+        milestones.add(new Milestone("Novice Saver", "Reached level 3", false, R.drawable.ic_budget_hustler, R.drawable.ic_budget_hustler_locked));
+        milestones.add(new Milestone("Mission Accomplished", "Completed 10 goals", false, R.drawable.ic_treasure_hoarder, R.drawable.ic_treasure_hoarder_locked));
+        milestones.add(new Milestone("Goal Champion", "Completed 15 goals", false, R.drawable.ic_goal_getter, R.drawable.ic_goal_getter_locked));
+        milestones.add(new Milestone("Completion Champion", "Completed 30 goals", false, R.drawable.ic_budget_hustler, R.drawable.ic_budget_hustler_locked));
+        milestones.add(new Milestone("Apprentice", "Reached level 10", false, R.drawable.ic_treasure_hoarder, R.drawable.ic_treasure_hoarder_locked));
+        milestones.add(new Milestone("Mastermind", "Reached level 30", false, R.drawable.ic_novice_saver, R.drawable.ic_novice_saver_locked));
+        milestones.add(new Milestone("Budget Hustler", "Completed 50 goals", false, R.drawable.ic_budget_hustler, R.drawable.ic_budget_hustler_locked));
+        milestones.add(new Milestone("Maverick", "Tracked finances for 5 days", false, R.drawable.ic_novice_saver, R.drawable.ic_novice_saver_locked));
+        milestones.add(new Milestone("Seasoned Financier", "Tracked finances for 15 days", false, R.drawable.ic_seasoned_financier, R.drawable.ic_seasoned_financier_locked));
+        milestones.add(new Milestone("Receipt Hunter", "Scan 5 receipts", false, R.drawable.ic_receipt_hunter, R.drawable.ic_receipt_hunter_locked));
+        milestones.add(new Milestone("Treasure Hoarder", "Scan 15 receipts", false, R.drawable.ic_treasure_hoarder, R.drawable.ic_treasure_hoarder_locked));
+
+        Log.d("Milestones", "Milestones List Size: " + milestones.size());
+    }
+
+    private void checkAndUnlockMilestones(int totalExp) {
+
+        int newLevel = 0;
+        newLevel= preferencesHelper.getUserLevel();
+        Log.d("MilestonesActivity", "User Level: " + newLevel);
+
+
+        //goal getter - complete 5 goals, 25 exp
+        if (totalExp >= 25) {
+            for (int i = 0; i < milestones.size(); i++) {
+                Milestone milestone = milestones.get(i);
+                if (milestone.getTitle().equals("Goal Getter") && !milestone.isUnlocked()) {
+                    milestone.setUnlocked(true);
+                    milestoneAdapter.notifyItemChanged(i);
+                }
+            }
+        }
+
+        //novice saver - level 3
+        if (newLevel >= 3) {
+            for (int i = 0; i < milestones.size(); i++) {
+                Milestone milestone = milestones.get(i);
+                if (milestone.getTitle().equals("Novice Saver") && !milestone.isUnlocked()) {
+                    milestone.setUnlocked(true);
+                    milestoneAdapter.notifyItemChanged(i);
+                }
+            }
+        }
+        //mission accomplished - 10 goals , 50 exp
+        if (totalExp >= 50) {
+            for (int i = 0; i < milestones.size(); i++) {
+                Milestone milestone = milestones.get(i);
+                if (milestone.getTitle().equals("Mission Accomplished") && !milestone.isUnlocked()) {
+                    milestone.setUnlocked(true);
+                    milestoneAdapter.notifyItemChanged(i);
+                }
+            }
+        }
+
+        //goal champion - 15 goals, 75 exp
+        if (totalExp>=75) {
+            for (int i = 0; i < milestones.size(); i++) {
+                Milestone milestone = milestones.get(i);
+                if (milestone.getTitle().equals("Goal Champion") && !milestone.isUnlocked()) {
+                    milestone.setUnlocked(true);
+                    milestoneAdapter.notifyItemChanged(i);
+                }
+            }
+        }
+
+        //completion champion - 30, 150
+        if (totalExp>=150) {
+            for (int i = 0; i < milestones.size(); i++) {
+                Milestone milestone = milestones.get(i);
+                if (milestone.getTitle().equals("Completion Champion") && !milestone.isUnlocked()) {
+                    milestone.setUnlocked(true);
+                    milestoneAdapter.notifyItemChanged(i);
+                }
+            }
+        }
+
+        //Mastermind - level 30
+        if (newLevel >= 30) {
+            for (int i = 0; i < milestones.size(); i++) {
+                Milestone milestone = milestones.get(i);
+                if (milestone.getTitle().equals("Mastermind") && !milestone.isUnlocked()) {
+                    milestone.setUnlocked(true);
+                    milestoneAdapter.notifyItemChanged(i);
+                }
+            }
+        }
+
+        //Budget hustler - 50 goals, 250 exp
+        if (newLevel >= 250) {
+            for (int i = 0; i < milestones.size(); i++) {
+                Milestone milestone = milestones.get(i);
+                if (milestone.getTitle().equals("Budget Hustler") && !milestone.isUnlocked()) {
+                    milestone.setUnlocked(true);
+                    milestoneAdapter.notifyItemChanged(i);
+                }
+            }
+        }
+    }
+
 }
