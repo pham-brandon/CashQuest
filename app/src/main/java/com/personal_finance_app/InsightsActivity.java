@@ -13,11 +13,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class InsightsActivity extends AppCompatActivity {
 
     private UserProfileFragment userProfileFragment;
+    private PreferenceHelper preferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insights);
+
+        preferencesHelper = new PreferenceHelper(this);
 
         // Initialize the profile fragment
         userProfileFragment = (UserProfileFragment) getSupportFragmentManager().findFragmentById(R.id.user_profile_fragment);
@@ -33,14 +36,6 @@ public class InsightsActivity extends AppCompatActivity {
         String username = prefs.getString("user_name", "User");
         int exp = prefs.getInt("user_exp", 0);
         int level = prefs.getInt("user_level", 1);
-
-        // Update the EXP bar in the fragment
-        if (userProfileFragment != null) {
-            int progress = exp % 15;
-            int progressPercentage = (progress * 100) / 15;
-            userProfileFragment.updateUserProfile(level + 1, progressPercentage, username);
-        }
-
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
 

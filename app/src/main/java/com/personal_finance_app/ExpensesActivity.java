@@ -39,6 +39,13 @@ public class ExpensesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expenses);
 
         preferencesHelper = new PreferenceHelper(this);
+
+        // Load user level or EXP if needed for milestones
+        int userLevel = preferencesHelper.getUserLevel();
+        int userExp = preferencesHelper.getUserExp();
+
+        Log.d("ExpensesActivity", "User EXP: " + userExp);
+        Log.d("ExpensesActivity", "User level: " + userLevel);
         // Initialize the profile fragment
         userProfileFragment = (UserProfileFragment) getSupportFragmentManager().findFragmentById(R.id.user_profile_fragment);
         if (userProfileFragment == null) {
@@ -60,7 +67,6 @@ public class ExpensesActivity extends AppCompatActivity {
             int progressPercentage = (progress * 100) / 15;
             userProfileFragment.updateUserProfile(level + 1, progressPercentage, username);
         }
-
 
         // Initialize RecyclerView and Adapter
         recyclerView = findViewById(R.id.expenses_recycler_view);
@@ -141,6 +147,30 @@ public class ExpensesActivity extends AppCompatActivity {
             Intent addExpenseIntent = new Intent(this, AddExpenseActivity.class);
             startActivityForResult(addExpenseIntent, ADD_EXPENSE_REQUEST_CODE); // Add request code
         });
+    }
+
+    protected void onResume() {
+        super.onResume();
+
+        UserManager userManager = new UserManager(this);
+        int exp = userManager.getUserExp();
+        int level = userManager.getUserLevel();
+
+        // Log values for debugging
+        Log.d("ExpensesActivity", "User EXP: " + exp);
+        Log.d("ExpensesActivity", "User level: " + level);
+
+        // Calculate progress (assuming 15 EXP required per level)
+        int progress = exp % 15;
+        int progressPercentage = (progress * 100) / 15;
+
+        // Update the UserProfileFragment with new level and progress
+        if (userProfileFragment != null) {
+            userProfileFragment.updateUserProfile(level + 1, progressPercentage, preferencesHelper.getUsername()); // +1 for 1-based level
+        }
+         else {
+            Log.e("ExpensesActivity", "UserProfileFragment not found!");
+        }
     }
     private void resetExpenses() {
         // Clear the list

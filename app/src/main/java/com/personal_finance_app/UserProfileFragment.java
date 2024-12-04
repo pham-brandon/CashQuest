@@ -85,4 +85,5 @@ public class UserProfileFragment extends Fragment {
         usernameTextView.setText(username);
     }
 
+
 }
