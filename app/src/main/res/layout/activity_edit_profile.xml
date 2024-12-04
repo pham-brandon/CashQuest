@@ -142,7 +142,7 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="66dp"
         android:fontFamily="@font/jersey"
         android:text="@string/saveChanges"
         android:textColor="@color/white"
@@ -153,7 +153,7 @@
         android:backgroundTint="@color/light_purple"
         android:textStyle="bold"/>
 
-    <!-- Delete Profile Button -->
+    <!-- Delete Profile Button
     <Button
         android:id="@+id/deleteProfileButton"
         android:layout_width="80dp"
@@ -163,7 +163,7 @@
         android:backgroundTint="@color/red"
         android:layout_marginStart="203dp"
         android:layout_marginTop="20dp"/>
-
+        -->
   </LinearLayout>
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
