@@ -35,7 +35,7 @@
         <item>سنوي</item>
     </string-array>
 
-    <string name="app_name">كاش كويست</string>
+    <string name="app_name">Cash Quest</string>
     <string name="title_expenses">النفقات</string>
     <string name="title_insights">الرؤى</string>
     <string name="title_placeholder">إضافة</string>
@@ -67,7 +67,7 @@
     <string name="goalsTitle">الأهداف</string>
     <string name="level_text">المستوى</string>
     <string name="exp">النقاط</string>
-    <string name="create_new">إنشاء جديد</string>
+    <string name="create_new">إنشاء هدف جديد</string>
     <string name="goals_progress_text">الأهداف والتقدم</string>
     <string name="goal_desc">وصف الهدف</string>
     <string name="goal_date">التاريخ</string>
@@ -86,7 +86,7 @@
     <string name="title3">سجل نفقاتك بسهولة</string>
     <string name="onboarding3">سجل النفقات بسرعة باستخدام ميزة المسح الذكي للإيصالات</string>
     <string name="welcomeUser">مرحباً بك، المستخدم!</string>
-    <string name="welcomeDesc">كل شيء جاهز وكاش كويست جاهز للعمل معك</string>
+    <string name="welcomeDesc">كل شيء جاهز وCash Quest جاهز للعمل معك</string>
     <!-- Side menu items -->
     <string name="editProfile">تعديل الملف الشخصي</string>
     <string name="help">المساعدة</string>
@@ -101,7 +101,7 @@
     <string name="saveChanges">حفظ التغييرات</string>
     <string name="deleteProfile">حذف الملف الشخصي</string>
 
-    <string name="milestonesTitle">الإنجازات والمعالم</string>
+    <string name="milestonesTitle">الإنجازات</string>
 
     <!-- About Activity -->
     <string name="about_app">حول CashQuest</string>
