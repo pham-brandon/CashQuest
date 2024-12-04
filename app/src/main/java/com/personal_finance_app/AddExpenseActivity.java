@@ -1,10 +1,6 @@
 package com.personal_finance_app;
-
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -13,25 +9,22 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
+
 
 public class AddExpenseActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    private static final String PREFS_NAME = "ExpensesPrefs";
-    private static final String EXPENSES_KEY = "expensesList";
+    private static final int OCR_REQUEST_CODE = 2;
 
     private EditText expenseTitle, amount;
     private Spinner expenseType, billFrequency;
     private Button createExpenseButton;
     private ImageButton uploadReceiptButton, cameraReceiptButton;
-
-    private List<Expense> expensesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +39,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         uploadReceiptButton = findViewById(R.id.uploadReceiptButton);
         cameraReceiptButton = findViewById(R.id.cameraReceiptButton);
 
-        loadExpensesFromPreferences();
+        List<Expense> expenses = new ArrayList<>();
 
         createExpenseButton.setOnClickListener(v -> {
             String title = expenseTitle.getText().toString().trim();
@@ -55,40 +48,26 @@ public class AddExpenseActivity extends AppCompatActivity {
             if (title.isEmpty() || amountStr.isEmpty()) {
                 Toast.makeText(AddExpenseActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
+                // Get the selected expense type and bill frequency
                 String selectedExpenseType = expenseType.getSelectedItem().toString();
                 String selectedBillFrequency = billFrequency.getSelectedItem().toString();
 
-                double expenseAmount;
-                try {
-                    expenseAmount = Double.parseDouble(amountStr);
-
-                    // amount > 0
-                    if (expenseAmount <= 0) {
-                        Toast.makeText(AddExpenseActivity.this, "Amount must be greater than zero", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                } catch (NumberFormatException e) {
-                    Toast.makeText(AddExpenseActivity.this, "Please enter a valid numeric value for the amount", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
+                // Create a new Expense object
                 Expense newExpense = new Expense(title, Double.parseDouble(amountStr), selectedExpenseType, selectedBillFrequency);
 
-                expensesList.add(newExpense);
-                saveExpensesToPreferences();
-
-                Toast.makeText(AddExpenseActivity.this, "Expense saved successfully", Toast.LENGTH_SHORT).show();
-                finish();
-                expenseTitle.setText("");
-                amount.setText("");
-                expenseType.setSelection(0);
-                billFrequency.setSelection(0);
+                // Send the new expense back to the ExpensesActivity
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("newExpense", newExpense);
+                setResult(RESULT_OK, resultIntent);
+                finish(); // Close AddExpenseActivity and return to ExpensesActivity
             }
         });
 
-        uploadReceiptButton.setOnClickListener(v -> openGallery());
+        uploadReceiptButton.setOnClickListener(v -> {
+            openGallery();
+        });
+
         cameraReceiptButton.setOnClickListener(v -> {
-            // Add functionality for camera capture here
         });
     }
 
@@ -98,28 +77,22 @@ public class AddExpenseActivity extends AppCompatActivity {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
-    private void loadExpensesFromPreferences() {
-        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        Gson gson = new Gson();
-        String expensesJson = sharedPreferences.getString(EXPENSES_KEY, null);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if (expensesJson != null) {
-            Type type = new TypeToken<List<Expense>>() {}.getType();
-            expensesList = gson.fromJson(expensesJson, type);
-        } else {
-            expensesList = new ArrayList<>();
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            Intent ocrIntent = new Intent(AddExpenseActivity.this, OCRTestActivity.class);
+            ocrIntent.putExtra("imageUri", selectedImageUri);
+            startActivityForResult(ocrIntent, OCR_REQUEST_CODE);
+        }
+
+        if (requestCode == OCR_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            String extractedAmount = data.getStringExtra("extractedAmount");
+            if (extractedAmount != null) {
+                amount.setText(extractedAmount);
+            }
         }
     }
-
-    private void saveExpensesToPreferences() {
-        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        Gson gson = new Gson();
-        String expensesJson = gson.toJson(expensesList);
-        editor.putString(EXPENSES_KEY, expensesJson);
-        editor.apply();
-    }
 }
-
-

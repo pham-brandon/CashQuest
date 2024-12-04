@@ -38,9 +38,14 @@ public class ExpensesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses);
 
-        // Initialize the profile fragment
         preferencesHelper = new PreferenceHelper(this);
 
+        // Load user level or EXP if needed for milestones
+        int userLevel = preferencesHelper.getUserLevel();
+        int userExp = preferencesHelper.getUserExp();
+
+        Log.d("ExpensesActivity", "User EXP: " + userExp);
+        Log.d("ExpensesActivity", "User level: " + userLevel);
         // Initialize the profile fragment
         userProfileFragment = (UserProfileFragment) getSupportFragmentManager().findFragmentById(R.id.user_profile_fragment);
         if (userProfileFragment == null) {
@@ -70,6 +75,7 @@ public class ExpensesActivity extends AppCompatActivity {
         expenseAdapter = new ExpenseAdapter(this, expenseList);
         recyclerView.setAdapter(expenseAdapter);
         expenseAdapter.notifyDataSetChanged(); // Refresh the adapter to display data
+
 
         // initialize spinner
         frequencySpinner = findViewById(R.id.expenseFilterSpinner);
@@ -141,8 +147,8 @@ public class ExpensesActivity extends AppCompatActivity {
             Intent addExpenseIntent = new Intent(this, AddExpenseActivity.class);
             startActivityForResult(addExpenseIntent, ADD_EXPENSE_REQUEST_CODE); // Add request code
         });
-    }
 
+    }
     private void resetExpenses() {
         // Clear the list
         expenseList.clear();
