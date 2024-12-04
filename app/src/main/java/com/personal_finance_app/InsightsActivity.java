@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -23,7 +27,7 @@ import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class InsightsActivity extends AppCompatActivity {
 
@@ -32,6 +36,9 @@ public class InsightsActivity extends AppCompatActivity {
     private Spinner insightsFilterSpinner;
     private static final String PREFS_NAME = "personal_finance_prefs";
     private static final String EXPENSES_KEY = "expenses";
+    private RecyclerView recyclerView;
+    private ExpenseAdapter expenseAdapter;
+    private ArrayList<Expense> expenseList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +69,6 @@ public class InsightsActivity extends AppCompatActivity {
 
         // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
 
         // Set selected item for the current activity
         navView.setSelectedItemId(R.id.menu_insights);
@@ -101,13 +107,15 @@ public class InsightsActivity extends AppCompatActivity {
         barChart = findViewById(R.id.insights_chart);
         insightsFilterSpinner = findViewById(R.id.insightsFilterSpinner);
 
+        // Get the expenses list from DataManager
+        expenseList = DataManager.getInstance().getExpenseList();
+
         // Set up the BarChart
         setupBarChart();
         loadChartData("Weekly"); // Default data load (Weekly)
 
         // Set up the Spinner for Weekly/Monthly filtering
         setupInsightFilterSpinner();
-
     }
 
     /**
@@ -141,45 +149,59 @@ public class InsightsActivity extends AppCompatActivity {
      * @param filterType The type of data to display ("Weekly" or "Monthly").
      */
     private void loadChartData(String filterType) {
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        List<Expense> expenseList = getExpensesFromPreferences();
+        // Log the filter type for debugging
+        Log.d("loadChartData", "Filter type: " + filterType);
 
-        // Example data
-        // if (filterType.equals("Weekly")) {
-        //    entries.add(new BarEntry(1, 50));  // Week 1
-        //   entries.add(new BarEntry(2, 75));  // Week 2
-           // entries.add(new BarEntry(3, 100)); // Week 3
-           // entries.add(new BarEntry(4, 150)); // Week 4
-        // } else if (filterType.equals("Monthly")) {
-            //entries.add(new BarEntry(1, 500)); // January
-            //entries.add(new BarEntry(2, 700)); // February
-            //entries.add(new BarEntry(3, 900)); // March
-            //entries.add(new BarEntry(4, 1200));// April
-        //}
+        // Map to hold the total amounts by expense type
+        Map<String, Float> expenseTotalsByType = new HashMap<>();
 
-        // Group expenses by frequency
-        //HashMap<String, Float> groupedExpenses = groupExpensesByFrequency(expenseList);
-
-        // Create chart data
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        if (filterType.equals("Weekly")) {
-            entries.add(new BarEntry(1, groupedExpenses.getOrDefault("Weekly", 0f)));
-        } else if (filterType.equals("Monthly")) {
-            entries.add(new BarEntry(1, groupedExpenses.getOrDefault("Monthly", 0f)));
+        // Calculate total amounts for each expense type, filtered by frequency (weekly/monthly)
+        for (Expense expense : expenseList) {
+            Log.d("loadChartData", "Expense: " + expense.getType() + ", Frequency: " + expense.getFrequency());
+            if (expense.getFrequency().equalsIgnoreCase(filterType)) {
+                // If this expense type is already in the map, add the amount to the total
+                expenseTotalsByType.put(expense.getType(),
+                        expenseTotalsByType.getOrDefault(expense.getType(), 0f) + (float) expense.getAmount());
+            }
         }
 
-        // Create dataset
-        BarDataSet dataSet = new BarDataSet(entries, filterType + " Expenses");
-        dataSet.setColor(Color.MAGENTA);
-        dataSet.setValueTextColor(Color.WHITE);
-        dataSet.setValueTextSize(12f);
+        // Log the totals for debugging
+        Log.d("loadChartData", "Expense totals by type: " + expenseTotalsByType);
+        Log.d("loadChartData", "Expense list size: " + expenseList.size());
 
-        // Attach dataset to BarData and then to BarChart
+        // Create BarEntries (x-axis is the index, y-axis is the total amount for that type)
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        int index = 0;
+
+        // Adding BarEntries for each expense type
+        for (Map.Entry<String, Float> entry : expenseTotalsByType.entrySet()) {
+            // Each entry is a BarEntry with x (index) and y (total amount)
+            entries.add(new BarEntry(index++, entry.getValue()));
+        }
+
+        // Create a BarDataSet for the BarChart
+        BarDataSet dataSet = new BarDataSet(entries, filterType + " Expenses by Type");
+        dataSet.setColor(Color.MAGENTA); // Set the color for the bars
+        dataSet.setValueTextColor(Color.WHITE); // Set the text color for the values
+        dataSet.setValueTextSize(12f); // Set the size of the value text
+
+        // Create BarData and set the bar width
         BarData barData = new BarData(dataSet);
-        barData.setBarWidth(0.9f); // Set bar width
+        barData.setBarWidth(0.9f); // Set the bar width
 
+        // Set the data to the chart
         barChart.setData(barData);
-        barChart.invalidate(); // Refresh the chart
+
+        // Set x-axis labels to be the expense types
+        ArrayList<String> xLabels = new ArrayList<>(expenseTotalsByType.keySet());
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(xLabels));
+        xAxis.setGranularity(1f); // Set the granularity for the x-axis (one label per bar)
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);  // Ensure labels are at the bottom
+        xAxis.setLabelRotationAngle(45);  // Rotate labels if they overlap
+
+        // Refresh the chart
+        barChart.invalidate();
     }
 
     /**
@@ -198,7 +220,7 @@ public class InsightsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedFilter = parent.getItemAtPosition(position).toString();
-                loadChartData(selectedFilter);
+                loadChartData(selectedFilter); // Update chart based on selection
             }
 
             @Override
@@ -207,6 +229,4 @@ public class InsightsActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }
