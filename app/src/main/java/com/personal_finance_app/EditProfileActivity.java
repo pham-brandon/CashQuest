@@ -1,32 +1,47 @@
 package com.personal_finance_app;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class EditProfileActivity extends AppCompatActivity {
 
     private EditText editUsername, editEmail, editPassword;
     private Button saveButton;
     private TextView headerUsernameTextView;
-    private UserProfileFragment userProfileFragment;
+    private FirebaseAuth mAuth;
+    private DatabaseReference userDatabaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        //retrieve the current username from SharedPreferences
+        // Firebase Authentication and Database initialization
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            userDatabaseRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid());
+        } else {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        // Retrieve the current username from SharedPreferences
         SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
         String username = prefs.getString("user_name", "User");
 
@@ -37,24 +52,16 @@ public class EditProfileActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButton);
         headerUsernameTextView = findViewById(R.id.headerUsernameTextView);
 
-        //Set to current username instead of the placeholder
+        // Set to current username and email
         headerUsernameTextView.setText(username);
+        editEmail.setText(currentUser != null ? currentUser.getEmail() : "");
 
         // Set save button click listener
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveProfileChanges();
-            }
-        });
+        saveButton.setOnClickListener(v -> saveProfileChanges());
 
-        // Initialize BottomNavigationView
+        // BottomNavigationView setup
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
-
-        // Set selected item for the current activity
         navView.setSelectedItemId(R.id.menu_expenses);
-
         navView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
@@ -63,15 +70,15 @@ public class EditProfileActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.menu_insights) {
                 startActivity(new Intent(this, InsightsActivity.class));
-                overridePendingTransition(0, 0); // No animation
+                overridePendingTransition(0, 0);
                 return true;
             } else if (itemId == R.id.menu_goals) {
                 startActivity(new Intent(this, GoalsActivity.class));
-                overridePendingTransition(0, 0); // No animation
+                overridePendingTransition(0, 0);
                 return true;
             } else if (itemId == R.id.menu_milestones) {
                 startActivity(new Intent(this, MilestonesActivity.class));
-                overridePendingTransition(0, 0); // No animation
+                overridePendingTransition(0, 0);
                 return true;
             }
 
@@ -80,16 +87,13 @@ public class EditProfileActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(view -> {
-            // Navigate to the desired page
             Intent intent = new Intent(this, AddExpenseActivity.class);
             startActivity(intent);
-            overridePendingTransition(0, 0); // No animation
+            overridePendingTransition(0, 0);
         });
-
     }
 
     private void saveProfileChanges() {
-        // Fetch input values
         String username = editUsername.getText().toString().trim();
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
@@ -108,37 +112,48 @@ public class EditProfileActivity extends AppCompatActivity {
             return;
         }
 
-        // Save changes (pseudo-code, replace with real implementation)
-        // For example, save to backend or local storage
-        boolean success = saveToDatabase(username, email, password);
-        if (success) {
-            // Save the new username to SharedPreferences
-            SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("user_name", username); // Save updated username
-            editor.apply(); // Commit the changes
-            UserProfileFragment userProfileFragment = (UserProfileFragment) getSupportFragmentManager().findFragmentById(R.id.user_profile_fragment);
-
-            // Notify the UserProfileFragment to update the UI (reload data)
-            if (userProfileFragment != null) {
-                userProfileFragment.updateUsername(username);
-            }
-            showToast("Profile updated successfully");
-
-            // Send the updated username back to ExpensesActivity
-            Intent intent = new Intent(EditProfileActivity.this, ExpensesActivity.class);
-            startActivity(intent); // Launch ExpensesActivity
-            finish(); // Close activity after saving
-
-        } else {
-            showToast("Failed to update profile. Please try again.");
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            showToast("User not authenticated");
+            return;
         }
-    }
 
-    private boolean saveToDatabase(String username, String email, String password) {
-        // Implement actual save logic here (e.g., API call or database update)
-        // Placeholder for demonstration purposes
-        return true;
+        // Update email
+        currentUser.updateEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Update password
+                        currentUser.updatePassword(password)
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        // Save username to the database
+                                        userDatabaseRef.child("username").setValue(username)
+                                                .addOnCompleteListener(task2 -> {
+                                                    if (task2.isSuccessful()) {
+                                                        // Update SharedPreferences
+                                                        SharedPreferences prefs = getSharedPreferences("personal_finance_prefs", MODE_PRIVATE);
+                                                        SharedPreferences.Editor editor = prefs.edit();
+                                                        editor.putString("user_name", username);
+                                                        editor.apply();
+
+                                                        showToast("Profile updated successfully");
+
+                                                        // Redirect to ExpensesActivity
+                                                        Intent intent = new Intent(EditProfileActivity.this, ExpensesActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    } else {
+                                                        showToast("Failed to update username in database");
+                                                    }
+                                                });
+                                    } else {
+                                        showToast("Failed to update password: " + task1.getException().getMessage());
+                                    }
+                                });
+                    } else {
+                        showToast("Failed to update email: " + task.getException().getMessage());
+                    }
+                });
     }
 
     private void showToast(String message) {
@@ -147,19 +162,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        // Initialize BottomNavigationView
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
-
-        // Set selected item for the current activity
         navView.setSelectedItemId(R.id.menu_expenses);
-
         if (R.id.menu_expenses != navView.getSelectedItemId()) {
-            navView.setSelectedItemId(R.id.menu_expenses); // Go to the default tab
+            navView.setSelectedItemId(R.id.menu_expenses);
         } else {
-            super.onBackPressed(); // Exit app
+            super.onBackPressed();
         }
     }
-
 }
