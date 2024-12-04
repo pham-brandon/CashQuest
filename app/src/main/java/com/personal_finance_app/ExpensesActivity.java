@@ -86,20 +86,41 @@ public class ExpensesActivity extends AppCompatActivity {
         //resetExpenses(); //future? maybe add a "clear all" button??
 
         // manually adding to test
-        //expenseList.add(new Expense("Rent", 1200.00, "Rent", "Monthly"));
-        //expenseList.add(new Expense("Groceries", 250.50, "Grocery", "Weekly"));
+        expenseList.add(new Expense("Eating Out", 120, "Food", "Weekly"));
+        expenseList.add(new Expense("Transportation", 60, "Travel", "Weekly"));
+        expenseList.add(new Expense("Grocery", 150, "Food", "Weekly"));
+        expenseList.add(new Expense("Utilities", 180, "Housing", "Monthly"));
+        expenseList.add(new Expense("Rent", 1000, "Housing", "Monthly"));
+        expenseList.add(new Expense("Entertainment", 50, "Entertainment", "Monthly"));
+        expenseList.add(new Expense("Healthcare", 200, "Healthcare", "Monthly"));
+        expenseList.add(new Expense("Education", 300, "Education", "Monthly"));
+        expenseList.add(new Expense("Shopping", 250, "Shopping", "Monthly"));
+        expenseList.add(new Expense("Subscriptions", 30, "Other", "Monthly"));
+        expenseList.add(new Expense("Insurance", 120, "Housing", "Monthly"));
+        expenseList.add(new Expense("Mortgage", 1500, "Housing", "Monthly"));
+        expenseList.add(new Expense("Debt Payments", 500, "Other", "Monthly"));
+        expenseList.add(new Expense("Charity/Donations", 100, "Other", "Monthly"));
+        expenseList.add(new Expense("Investment", 200, "Other", "Monthly"));
+        expenseList.add(new Expense("Pet Care", 50, "Other", "Weekly"));
+        expenseList.add(new Expense("Travel/Vacation", 300, "Travel", "Monthly"));
+        expenseList.add(new Expense("Other", 75, "Other", "Weekly"));
+
 
         // Get the new Expense object passed from AddExpenseActivity
         Intent intent = getIntent();
         if (intent.hasExtra("newExpense")) {
             Expense newExpense = (Expense) intent.getSerializableExtra("newExpense");
-            expenseList.add(newExpense);
-            expenseAdapter.notifyDataSetChanged(); // Refresh the adapter to display new data
-
-            Toast.makeText(this, "Expense added: " + newExpense.getTitle(), Toast.LENGTH_SHORT).show();
+            if (newExpense != null) {
+                expenseList.add(newExpense);
+                expenseAdapter.notifyDataSetChanged(); // Refresh the adapter to display new data
+                Toast.makeText(this, "Expense added: " + newExpense.getTitle(), Toast.LENGTH_SHORT).show();
+            } else {
+                Log.e("ExpensesActivity", "New Expense is null");
+            }
         }
 
-
+        // Update the expense list in DataManager
+        DataManager.getInstance().setExpenseList(expenseList);
         // Set default selection
         frequencySpinner.setSelection(0);
 
