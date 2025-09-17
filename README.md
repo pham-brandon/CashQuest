@@ -6,6 +6,16 @@
 
 *Many young students face constant financial challenges due to limited income and a lack of experience in managing personal finances. Without a structured system to track spending, it is easy to lose sight of where money is going, leading to overspending and struggling to achieve financial goals, such as saving for tuition, rent, or personal activities.*
 
+## Screenshots
+<div align="center">
+<img width="400" height="2261" alt="Image" src="https://github.com/user-attachments/assets/eb8efbb4-40f2-4fa2-8811-aa7ce30f09ad" />
+  <p><em>Figure 1: Login/Register</em></p>
+  <img src="https://github.com/user-attachments/assets/8b87406d-cf56-4762-b59b-d86aec41c4d0" width="1500" />
+  <p><em>Figure 2: Expenses, Insights, OCR Scanner, Goals, and Milestones</em></p>
+</div>
+
+
+
 ## Project Objectives
 
 This application will be a personal management tool, curated to user’s needs to help with financing, tracking income and expenses, and provide methods of reaching personal financial goals. We will ensure that the application is easy to use with a clean, user-friendly design displaying graphs to help visualize spending amounts.
